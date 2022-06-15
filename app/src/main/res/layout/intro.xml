@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_gradient"
+    >
+
+    <TextView
+        android:id="@+id/introText"
+        android:layout_width="238dp"
+        android:layout_height="250dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="33dp"
+        android:background="#00000000"
+        android:fontFamily="@font/notosans_bold"
+        android:text="제로웨이스트,\n비건을 위한\n맞춤 여행을\n떠나볼까요?"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp" />
+
+    <ImageView
+        android:id="@+id/introImg"
+        android:layout_width="146dp"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="219dp"
+        android:layout_marginTop="251dp"
+        android:alpha="0.3"
+        android:background="@drawable/ic_dashboard_black_24dp" />
+
+    <android.widget.Button
+        android:id="@+id/kakaoJoinBtn"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="490dp"
+        android:background="@drawable/round_button"
+        android:backgroundTint="#FEE500"
+        android:fontFamily="@font/notosans_bold"
+        android:text="카카오 아이디로 계속하기"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <android.widget.Button
+        android:id="@+id/JoinBtn"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="550dp"
+        android:backgroundTint="#FFFFFF"
+        android:background="@drawable/round_button"
+        android:text="이메일로 계속하기"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:fontFamily="@font/notosans_bold"
+        />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="32dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="680dp"
+        android:gravity="center_horizontal|top"
+        android:lineSpacingExtra="4sp"
+        android:text="제비의 여행"
+        android:textSize="25sp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/nanumsquare"
+        />
+
+    <TextView
+        android:layout_width="169dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="710dp"
+        android:text="in Seoul"
+        android:textSize="16sp"
+        android:textColor="#781F1F1F"
+        android:lineSpacingExtra="2sp"
+        android:translationY="-1.23sp"
+        android:gravity="center_horizontal|top"
+        android:fontFamily="@font/nanumsquare"
+        />
+
+
+</RelativeLayout>
