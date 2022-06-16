@@ -1,22 +1,29 @@
 package com.example.zaevtour;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+
 public class IntroActivity extends AppCompatActivity {
     Animation fadeIn;
     TextView introText;
+    Button kakaoJoinBtn;
     ImageView introImg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +31,8 @@ public class IntroActivity extends AppCompatActivity {
 
         introText = findViewById(R.id.introText);
         introImg = findViewById(R.id.introImg);
+        Glide.with(this).load(R.raw.animation_bird).into(introImg);
+        kakaoJoinBtn = findViewById(R.id.kakaoJoinBtn);
 
         // 제비 글자색 바꾸기
         String content = introText.getText().toString();
@@ -62,7 +71,13 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
         introText.startAnimation(fadeIn);
-        introImg.startAnimation(fadeIn);
-    }
 
+        kakaoJoinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 }
