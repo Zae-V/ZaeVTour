@@ -11,18 +11,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.zaevtour.databinding.FragmentProfileBinding;
+import com.example.zaevtour.databinding.FragmentSearchBinding;
 
 
 public class SearchFragment extends Fragment {
 
-    private FragmentProfileBinding binding;
+    private FragmentSearchBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         SearchViewModel searchViewModel =
                 new ViewModelProvider(this).get(SearchViewModel.class);
 
-        binding = FragmentProfileBinding.inflate(inflater, container, false);
+        binding = FragmentSearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
 //        final TextView textView = binding.textProfile;
