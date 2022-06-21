@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment"
     android:background="#FFFFFF">
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -59,27 +57,16 @@
                     android:textColor="#000000"
                     android:textStyle="bold"
                     android:textSize="20sp"/>
-
-
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical"
-                android:background="@drawable/textlines"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp">
-
-                <TextView
-                    android:id="@+id/profileImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:fontFamily="@font/notosans_bold"
-                    android:text="개인 정보"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -130,115 +117,67 @@
                         android:textSize="15sp"/>
 
                 </LinearLayout>
+
             </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:background="@drawable/textlines"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp">
-
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:fontFamily="@font/notosans_bold"
-                android:text="설정"
-                android:textColor="#000000"
-                android:textSize="20sp" />
-
-            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:fontFamily="@font/notosans_bold"
+                android:text="회원 정보 확인"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:layout_marginLeft="25dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:text="알림 설정"
-                    android:textColor="#000000"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"/>
-
-                <Switch
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"/>
-            </LinearLayout>
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:text="필터 설정"
-                    android:textColor="#000000"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"/>
-
-                <Switch
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"/>
-
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:weightSum="3">
+                android:text="정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 입력해주세요."
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"/>
 
             <TextView
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="비밀번호를 입력하세요"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"/>
+
+            <EditText
+                android:id="@+id/editTextTextPassword"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:background="@drawable/password_rounded_shpae"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"/>
+
+            <android.widget.Button
+                android:id="@+id/confirmBtn"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
                 android:fontFamily="@font/notosans_bold"
-                android:text="계정 관리"
-                android:textColor="#000000"
-                android:textSize="20sp" />
+                android:text="본인 확인"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:textAlignment="center"
+                android:background="@drawable/button_rounded_shape_gradient"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp" />
 
-            <TextView
-                android:id="@+id/modifyProfileTextView"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:text="계정 정보 변경"
-                android:gravity="center_vertical"
-                android:textColor="#000000"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:text="로그아웃"
-                android:gravity="center_vertical"
-                android:textColor="#000000"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:text="탈퇴"
-                android:gravity="center_vertical"
-                android:textColor="#000000"
-                android:textSize="15sp"/>
-
-        </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="150dp">
-            </View>
+                android:layout_height="150dp" />
+
         </LinearLayout>
+
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,17 @@
 package com.example.zaevtour;
 
+import android.nfc.cardemulation.HostNfcFService;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.zaevtour.ui.home.HomeFragment;
+import com.example.zaevtour.ui.profile.ModifyProfileView;
+import com.example.zaevtour.ui.profile.ModifyProfileView2;
+import com.example.zaevtour.ui.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,6 +37,28 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+    }
+
+    public void changeFragment(int index){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        switch(index){
+            case 1:
+                ProfileFragment profileFragment = new ProfileFragment();
+                transaction.replace(R.id.nav_host_fragment_activity_main, profileFragment);
+                transaction.commit();
+                break;
+            case 2:
+                ModifyProfileView modifyProfileView = new ModifyProfileView();
+                transaction.replace(R.id.nav_host_fragment_activity_main, modifyProfileView);
+                transaction.commit();
+                break;
+            case 3:
+                ModifyProfileView2 modifyProfileView2 = new ModifyProfileView2();
+                transaction.replace(R.id.nav_host_fragment_activity_main, modifyProfileView2);
+                transaction.commit();
+                break;
+
+        }
     }
 
 }

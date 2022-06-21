@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.captaindroid.tvg.Tvg;
+import com.example.zaevtour.MainActivity;
 import com.example.zaevtour.R;
 import com.example.zaevtour.databinding.FragmentProfileBinding;
 
@@ -34,6 +35,15 @@ public class ProfileFragment extends Fragment {
         TextView textView = v.findViewById(R.id.profileText);
         Tvg.change(textView, Color.parseColor("#8CEDB3"), Color.parseColor("#6C92F4"));
 
+        MainActivity activity = (MainActivity)getActivity();
+
+        TextView modifyProfileTextView = v.findViewById(R.id.modifyProfileTextView);
+        modifyProfileTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.changeFragment(2);
+            }
+        });
         return v;
     }
 
