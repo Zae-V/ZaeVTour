@@ -8,38 +8,33 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.captaindroid.tvg.Tvg;
 import com.example.zaevtour.databinding.ActivityMainBinding;
+import com.example.zaevtour.ui.sign.SignInFragment;
 
 public class SignActivity extends AppCompatActivity {
 
-    TextView usernameText;
-    TextView greetingText;
-
-    EditText editID;
-    EditText editPW;
-
-    Button signInBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_sign_in);
+        setContentView(R.layout.activity_sign);
 
-        usernameText = findViewById(R.id.usernameText);
-        greetingText = findViewById(R.id.greetingText);
-
-        editID = findViewById(R.id.editID);
-        editPW = findViewById(R.id.editPW);
-
-        signInBtn = findViewById(R.id.signInBtn);
-
-        // 텍스트 글자색 그라데이션 적용
-        Tvg.change(usernameText, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
-        Tvg.change(greetingText, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
-
-
+        // 화면 전환 프래그먼트 선언 및 초기 화면 설정
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.fragment_activity_sign, SignInFragment.newInstance()).commit();
 
     }
+
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_activity_sign, fragment).commit();
+    }
+        // Fragment로 사용할 MainActivity내의 layout공간을 선택합니다.}
+
 }
