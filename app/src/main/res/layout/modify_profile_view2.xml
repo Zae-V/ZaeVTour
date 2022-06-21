@@ -59,88 +59,50 @@
                     android:textSize="20sp"/>
             </LinearLayout>
 
-
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:text="이름"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp">
+                android:layout_marginRight="25dp"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:text="이름"
-                        android:textColor="#000000"
-                        android:gravity="center_vertical"
-                        android:textSize="15sp"/>
-
-                    <TextView
-                        android:id="@+id/nameTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:text="제비"
-                        android:gravity="center|right"
-                        android:layout_marginRight="0dp"
-                        android:textSize="15sp"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:text="이메일"
-                        android:textColor="#000000"
-                        android:gravity="center_vertical"
-                        android:textSize="15sp"/>
-
-                    <TextView
-                        android:id="@+id/emailTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:text="swallow@kakao.com"
-                        android:gravity="center|right"
-                        android:textSize="15sp"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/notosans_bold"
-                android:text="회원 정보 확인"
-                android:textColor="#000000"
-                android:textSize="15sp"
-                android:layout_marginLeft="25dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 입력해주세요."
-                android:textColor="#000000"
-                android:textSize="15sp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:background="@drawable/password_rounded_shpae"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="비밀번호를 입력하세요"
+                android:text="비밀번호"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:background="@drawable/password_rounded_shpae"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="비밀번호를 확인"
                 android:textColor="#000000"
                 android:textSize="15sp"
                 android:layout_marginTop="30dp"
@@ -159,16 +121,16 @@
                 android:layout_marginRight="25dp"/>
 
             <android.widget.Button
-                android:id="@+id/confirmBtn"
+                android:id="@+id/modifyBtn"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:fontFamily="@font/notosans_bold"
-                android:text="본인 확인"
+                android:text="정보 수정"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp"
                 android:textAlignment="center"
                 android:background="@drawable/button_rounded_shape_gradient"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp" />
 

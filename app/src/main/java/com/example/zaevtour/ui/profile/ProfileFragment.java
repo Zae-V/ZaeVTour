@@ -41,7 +41,7 @@ public class ProfileFragment extends Fragment {
         modifyProfileTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.changeFragment(1);
+                activity.changeFragment(2);
             }
         });
         return v;
