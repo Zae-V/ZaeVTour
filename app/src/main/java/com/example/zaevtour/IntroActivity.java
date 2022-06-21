@@ -22,6 +22,7 @@ public class IntroActivity extends AppCompatActivity {
     Animation fadeIn;
     TextView introText;
     Button kakaoJoinBtn;
+    Button joinBtn;
     ImageView introImg;
 
     @Override
@@ -33,6 +34,7 @@ public class IntroActivity extends AppCompatActivity {
         introImg = findViewById(R.id.introImg);
         Glide.with(this).load(R.raw.animation_bird).into(introImg);
         kakaoJoinBtn = findViewById(R.id.kakaoJoinBtn);
+        joinBtn = findViewById(R.id.JoinBtn);
 
         // 제비 글자색 바꾸기
         String content = introText.getText().toString();
@@ -76,6 +78,14 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        joinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(IntroActivity.this, SignActivity.class);
                 startActivity(intent);
             }
         });
