@@ -41,7 +41,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.4.2'
     implementation 'androidx.navigation:navigation-ui:2.4.2'
     implementation 'com.github.tushar09:Gradient-Textview:1.1' //Gradient Text - https://github.com/tushar09/Gradient-Textview
-    implementation 'de.hdodenhof:circleimageview:3.1.0' //Circle ImageView - https://github.com/hdodenhof/CircleImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+//Circle ImageView - https://github.com/hdodenhof/CircleImageView
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
