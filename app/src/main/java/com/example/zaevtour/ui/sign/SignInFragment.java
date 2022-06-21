@@ -11,10 +11,21 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.zaevtour.R;
 
 public class SignInFragment extends Fragment {
+
+    TextView usernameText;
+    TextView greetingText;
+
+    EditText editID;
+    EditText editPW;
+
+    Button signInBtn;
 
     private SignInViewModel mViewModel;
 
