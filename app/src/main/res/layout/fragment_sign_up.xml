@@ -8,30 +8,18 @@
     tools:context=".ui.sign.SignUpFragment">
 
     <TextView
-        android:id="@+id/introText"
+        android:id="@+id/greetingText"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="70dp"
         android:fontFamily="@font/notosans_bold"
-        android:text="환영합니다!"
+        android:text="환영합니다!\n만나서 반가워요 :D"
         android:textColor="@color/text_gradient_start"
         android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/greetingText"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="45dp"
-        android:fontFamily="@font/notosans_bold"
-        android:text="만나서 반가워요 :D"
-        android:textColor="@color/text_gradient_end"
-        android:textSize="32sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/introText" />
 
     <LinearLayout
         android:layout_width="370dp"
