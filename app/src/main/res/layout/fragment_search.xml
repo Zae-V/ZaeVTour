@@ -1,14 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.search.SearchFragment"
-    android:background="#FFFFFF">
+    tools:context=".ui.search.SearchFragment">
 
-    <TextView
+
+    <LinearLayout
+        android:id="@+id/search_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="100dp"
+        android:gravity="center_horizontal|center_vertical"
+        tools:ignore="MissingConstraints">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rectangle"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:elevation="4dp"
+            android:drawableRight="@drawable/search_button"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/recentBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_bar"
+        android:paddingHorizontal="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="최근 검색지역"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+        <GridView
+            android:id="@+id/recentVisit"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="4"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/currentPosition"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:text="현재 위치"
+            android:textStyle="bold"
+            android:elevation="4dp"
+            android:textColor="@color/black"
+            android:layout_gravity="right"
+            android:background="@drawable/rectangle_gray"
+            />
+
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/allList"
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="20dp"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recentBar"
+        android:numColumns="4"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
