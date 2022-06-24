@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ public class IntroActivity extends AppCompatActivity {
         introImg = findViewById(R.id.introImg);
         Glide.with(this).load(R.raw.animation_bird).into(introImg);
         kakaoJoinBtn = findViewById(R.id.kakaoJoinBtn);
-        joinBtn = findViewById(R.id.JoinBtn);
+        joinBtn = findViewById(R.id.joinBtn);
 
         // 제비 글자색 바꾸기
         String content = introText.getText().toString();
