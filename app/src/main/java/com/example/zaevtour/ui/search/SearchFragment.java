@@ -1,10 +1,12 @@
 package com.example.zaevtour.ui.search;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +36,17 @@ public class SearchFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_search, container, false);
 
+        MainActivity activity = (MainActivity)getActivity();
+
+        ImageView imageView = v.findViewById(R.id.backBtn);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(),"click",Toast.LENGTH_LONG).show();
+            }
+        });
+
         if (getActivity() != null && getActivity() instanceof MainActivity){
             ((MainActivity)getActivity()).getNav().setVisibility(View.GONE);
         }
@@ -54,6 +67,12 @@ public class SearchFragment extends Fragment {
 
         VisitedAdapter recentCityAdapter = new VisitedAdapter(getContext(),Visited);
         binding.recentVisit.setAdapter(recentCityAdapter);
+        binding.recentVisit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getContext(),Visited[i] +"을 선택하셨습니다.", Toast.LENGTH_LONG).show();
+            }
+        });
 
         return root;
     }

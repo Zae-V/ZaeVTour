@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(R.id.nav_host_fragment_activity_main, modifyProfileView2);
                 transaction.commit();
                 break;
+            case 4:
+                HomeFragment homeFragment = new HomeFragment();
+                transaction.replace(R.id.nav_host_fragment_activity_main,homeFragment);
+                transaction.commit();
 
         }
     }
