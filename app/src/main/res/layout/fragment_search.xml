@@ -3,12 +3,383 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.search.SearchFragment"
     android:background="#FFFFFF">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <android.widget.Button
+            android:id="@+id/spinnerBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="#00ff0000"
+            android:drawableEnd="@drawable/spinner_btn"
+            android:fontFamily="@font/notosans_bold"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="전체 지역"
+            android:textColor="#E6000000"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7" />
+
+        <EditText
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/profile_rounded_shape"
+            android:elevation="3dp"
+            android:orientation="horizontal"
+            android:textColor="#E6000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerBtn" />
+
+        <android.widget.ImageButton
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="#00ff0000"
+            android:maxWidth="35dp"
+            android:maxHeight="35dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/search_image"
+            android:text="Button"
+            android:translationX="-20dp"
+            android:translationY="-35dp"
+            app:layout_constraintEnd_toEndOf="@+id/searchBar"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@id/searchBar"
+            app:layout_constraintTop_toBottomOf="@+id/searchBar" />
+
+        <TextView
+            android:id="@+id/categoryText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/notosans_bold"
+            android:text="카테고리"
+            android:textColor="#E6000000"
+            android:textSize="17dp"
+            app:layout_constraintBottom_toTopOf="@+id/categoryLayout1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchBar" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/categoryLayout1"
+            android:layout_width="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:layout_constraintTop_toTopOf="@+id/categoryText">
+
+            <android.widget.Button
+                android:id="@+id/spotBtn"
+                android:layout_width="75dp"
+                android:layout_height="80dp"
+                android:drawableTop="@drawable/spot_btn"
+                android:background="#00ff0000"
+                android:fontFamily="@font/notosans_regular"
+                android:text="관광명소"
+                android:textSize="11sp"
+                android:textColor="#E6000000"
+                app:layout_constraintEnd_toStartOf="@+id/hotelBtn"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <android.widget.Button
+                android:id="@+id/hotelBtn"
+                android:layout_width="75dp"
+                android:layout_height="80dp"
+                android:drawableTop="@drawable/hotel_btn"
+                android:background="#00ff0000"
+                android:text="숙소"
+                android:fontFamily="@font/notosans_regular"
+                android:textSize="11sp"
+                android:textColor="#E6000000"
+                app:layout_constraintEnd_toStartOf="@+id/restaurantBtn"
+                app:layout_constraintStart_toEndOf="@+id/spotBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.widget.Button
+                android:id="@+id/restaurantBtn"
+                android:layout_width="75dp"
+                android:layout_height="80dp"
+                android:drawableTop="@drawable/restaurant_btn"
+                android:background="#00ff0000"
+                android:text="식당"
+                android:fontFamily="@font/notosans_regular"
+                android:textSize="11sp"
+                android:textColor="#E6000000"
+                app:layout_constraintEnd_toStartOf="@+id/cafeBtn"
+                app:layout_constraintStart_toEndOf="@+id/hotelBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.widget.Button
+                android:id="@+id/cafeBtn"
+                android:layout_width="75dp"
+                android:layout_height="80dp"
+                android:drawableTop="@drawable/cafe_btn"
+                android:background="#00ff0000"
+                android:text="카페"
+                android:fontFamily="@font/notosans_regular"
+                android:textSize="11sp"
+                android:textColor="#E6000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/restaurantBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/categoryLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/categoryLayout1">
+            <android.widget.Button
+                android:id="@+id/reuseBtn"
+                android:layout_width="75dp"
+                android:layout_height="80dp"
+                android:drawableTop="@drawable/reuse_btn"
+                android:background="#00ff0000"
+                android:fontFamily="@font/notosans_regular"
+                android:text="다회용기"
+                android:textSize="11sp"
+                android:textColor="#E6000000"
+                app:layout_constraintEnd_toStartOf="@+id/ploggingBtn"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <android.widget.Button
+                android:id="@+id/ploggingBtn"
+                android:layout_width="75dp"
+                android:layout_height="80dp"
+                android:drawableTop="@drawable/plogging_btn"
+                android:background="#00ff0000"
+                android:text="플로깅"
+                android:fontFamily="@font/notosans_regular"
+                android:textSize="11sp"
+                android:textColor="#E6000000"
+                app:layout_constraintEnd_toStartOf="@+id/shopBtn"
+                app:layout_constraintStart_toEndOf="@+id/reuseBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.widget.Button
+                android:id="@+id/shopBtn"
+                android:layout_width="75dp"
+                android:layout_height="80dp"
+                android:drawableTop="@drawable/shop_btn"
+                android:background="#00ff0000"
+                android:text="제로웨이스트 샵"
+                android:fontFamily="@font/notosans_regular"
+                android:textSize="11sp"
+                android:textColor="#E6000000"
+                app:layout_constraintEnd_toStartOf="@+id/allBtn"
+                app:layout_constraintStart_toEndOf="@+id/ploggingBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.widget.Button
+                android:id="@+id/allBtn"
+                android:layout_width="75dp"
+                android:layout_height="80dp"
+                android:drawableTop="@drawable/all_btn"
+                android:background="#00ff0000"
+                android:text="전체보기"
+                android:fontFamily="@font/notosans_regular"
+                android:textSize="11sp"
+                android:textColor="#E6000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/shopBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/keywordText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/notosans_bold"
+            android:text="추천 키워드"
+            android:textColor="#E6000000"
+            android:textSize="17dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoryLayout2" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/keywordLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            app:layout_constraintTop_toBottomOf="@+id/keywordText"
+            tools:layout_editor_absoluteX="35dp">
+
+            <android.widget.Button
+                android:id="@+id/keywordBtn1"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded"
+                android:backgroundTint="#FAFAFA"
+                android:fontFamily="@font/notosans_regular"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="# 당일치기"
+                android:textColor="#E6000000"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/keywordBtn2"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.widget.Button
+                android:id="@+id/keywordBtn2"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded"
+                android:backgroundTint="#FAFAFA"
+                android:fontFamily="@font/notosans_regular"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="# 제로웨이스트 샵"
+                android:textColor="#E6000000"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/keywordBtn1"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/keywordLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            app:layout_constraintTop_toBottomOf="@+id/keywordLayout1"
+            tools:layout_editor_absoluteX="35dp">
+
+            <android.widget.Button
+                android:id="@+id/keywordBtn3"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded"
+                android:backgroundTint="#FAFAFA"
+                android:fontFamily="@font/notosans_regular"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="# 다회용기 대여 상점"
+                android:textColor="#E6000000"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/keywordBtn4"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.widget.Button
+                android:id="@+id/keywordBtn4"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded"
+                android:backgroundTint="#FAFAFA"
+                android:fontFamily="@font/notosans_regular"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="# 비건"
+                android:textColor="#E6000000"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/keywordBtn3"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/keywordLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            app:layout_constraintTop_toBottomOf="@+id/keywordLayout2"
+            tools:layout_editor_absoluteX="35dp">
+
+            <android.widget.Button
+                android:id="@+id/keywordBtn5"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded"
+                android:backgroundTint="#FAFAFA"
+                android:fontFamily="@font/notosans_regular"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="# 플로깅"
+                android:textColor="#E6000000"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/keywordBtn6"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.widget.Button
+                android:id="@+id/keywordBtn6"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded"
+                android:backgroundTint="#FAFAFA"
+                android:fontFamily="@font/notosans_regular"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="# 비건 식당"
+                android:textColor="#E6000000"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/keywordBtn5"
+                app:layout_constraintEnd_toStartOf="@+id/keywordBtn7"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.widget.Button
+                android:id="@+id/keywordBtn7"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded"
+                android:backgroundTint="#FAFAFA"
+                android:fontFamily="@font/notosans_regular"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="# 서울"
+                android:textColor="#E6000000"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/keywordBtn6"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

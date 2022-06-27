@@ -4,4 +4,6 @@
     android:font="@font/notosans_bold" />
     <font android:fontStyle="normal"
         android:font="@font/notosans_black" />
+    <font android:fontStyle="normal"
+        android:font="@font/notosans_regular" />
 </font-family>
