@@ -3,6 +3,7 @@ package com.example.zaevtour;
 import android.nfc.cardemulation.HostNfcFService;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.zaevtour.ui.home.HomeFragment;
 import com.example.zaevtour.ui.profile.ModifyProfileView;
@@ -22,6 +23,7 @@ import com.example.zaevtour.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    BottomNavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_search,R.id.navigation_bookmark, R.id.navigation_notifications)
                 .build();
@@ -57,8 +59,15 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(R.id.nav_host_fragment_activity_main, modifyProfileView2);
                 transaction.commit();
                 break;
+            case 4:
+                HomeFragment homeFragment = new HomeFragment();
+                transaction.replace(R.id.nav_host_fragment_activity_main,homeFragment);
+                transaction.commit();
 
         }
     }
 
+    public BottomNavigationView getNav() {
+        return navView;
+    }
 }
