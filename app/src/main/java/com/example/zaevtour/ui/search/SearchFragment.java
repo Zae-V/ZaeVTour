@@ -19,6 +19,7 @@ import com.example.zaevtour.databinding.FragmentSearchBinding;
 public class SearchFragment extends Fragment {
 
     private FragmentSearchBinding binding;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         SearchViewModel searchViewModel =

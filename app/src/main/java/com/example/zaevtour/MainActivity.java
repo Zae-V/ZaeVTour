@@ -3,11 +3,14 @@ package com.example.zaevtour;
 import android.nfc.cardemulation.HostNfcFService;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.zaevtour.ui.home.HomeFragment;
 import com.example.zaevtour.ui.profile.ModifyProfileView;
 import com.example.zaevtour.ui.profile.ModifyProfileView2;
 import com.example.zaevtour.ui.profile.ProfileFragment;
+import com.example.zaevtour.ui.search.SearchFragment;
+import com.example.zaevtour.ui.search.SearchFragment2;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +25,7 @@ import com.example.zaevtour.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    BottomNavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_search,R.id.navigation_bookmark, R.id.navigation_notifications)
                 .build();
@@ -57,8 +61,20 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(R.id.nav_host_fragment_activity_main, modifyProfileView2);
                 transaction.commit();
                 break;
-
+            case 4:
+                SearchFragment2 searchFragment2 = new SearchFragment2();
+                transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment2);
+                transaction.commit();
+                break;
+            case 5:
+                SearchFragment searchFragment = new SearchFragment();
+                transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment);
+                transaction.commit();
+                break;
         }
     }
 
+    public BottomNavigationView getNav() {
+        return navView;
+    }
 }
