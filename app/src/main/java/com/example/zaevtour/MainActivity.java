@@ -9,6 +9,8 @@ import com.example.zaevtour.ui.home.HomeFragment;
 import com.example.zaevtour.ui.profile.ModifyProfileView;
 import com.example.zaevtour.ui.profile.ModifyProfileView2;
 import com.example.zaevtour.ui.profile.ProfileFragment;
+import com.example.zaevtour.ui.search.SearchFragment;
+import com.example.zaevtour.ui.search.SearchFragment2;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,10 +62,15 @@ public class MainActivity extends AppCompatActivity {
                 transaction.commit();
                 break;
             case 4:
-                HomeFragment homeFragment = new HomeFragment();
-                transaction.replace(R.id.nav_host_fragment_activity_main,homeFragment);
+                SearchFragment2 searchFragment2 = new SearchFragment2();
+                transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment2);
                 transaction.commit();
-
+                break;
+            case 5:
+                SearchFragment searchFragment = new SearchFragment();
+                transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment);
+                transaction.commit();
+                break;
         }
     }
 
