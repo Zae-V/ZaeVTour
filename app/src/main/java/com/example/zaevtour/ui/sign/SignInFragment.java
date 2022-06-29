@@ -25,8 +25,7 @@ import com.example.zaevtour.SignActivity;
 
 public class SignInFragment extends Fragment {
 
-    TextView usernameText;
-    TextView greetingText;
+    TextView userGreetingText;
 
     TextView findPWText;
     TextView signUpText;
@@ -47,8 +46,7 @@ public class SignInFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.fragment_sign_in, container, false);
 
-        usernameText = v.findViewById(R.id.usernameText);
-        greetingText = v.findViewById(R.id.greetingText);
+        userGreetingText = v.findViewById(R.id.userGreetingText);
         findPWText = v.findViewById(R.id.findPwText);
         signUpText = v.findViewById(R.id.signUpText);
 
@@ -79,8 +77,7 @@ public class SignInFragment extends Fragment {
         });
 
         // 텍스트 글자색 그라데이션 적용
-        Tvg.change(usernameText, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
-        Tvg.change(greetingText, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
+        Tvg.change(userGreetingText, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
         return v;
     }
 
