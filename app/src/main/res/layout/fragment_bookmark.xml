@@ -4,20 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/container_bookmark"
     tools:context=".ui.bookmark.BookmarkFragment"
     android:background="#FFFFFF">
 
+
     <TextView
-        android:id="@+id/text_bookmark"
-        android:layout_width="match_parent"
+        android:id="@+id/bookmarkText"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/notosans_bold"
+        android:text="찜목록 💕"
+        android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/shareBtn"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop = "12dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/share_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toTopOf="@id/bookmarkText" />
+
+
+    <EditText
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:paddingRight="15dp"
+        android:layout_gravity="center"
+        android:background="@drawable/rectangle"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:elevation="4dp"
+        android:drawableRight="@drawable/search_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bookmarkText"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bookmarkRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchBar"/>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
