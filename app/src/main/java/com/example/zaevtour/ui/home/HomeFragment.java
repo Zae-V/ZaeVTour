@@ -27,7 +27,7 @@ public class HomeFragment extends Fragment {
         // 텍스트 Gradient 적용
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         TextView textView = v.findViewById(R.id.titleText);
-        Tvg.change(textView, Color.parseColor("#8CEDB3"), Color.parseColor("#6C92F4"));
+        Tvg.change(textView, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
 
         return v;
     }

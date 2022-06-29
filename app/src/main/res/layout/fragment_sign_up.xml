@@ -27,7 +27,7 @@
                 android:fontFamily="@font/notosans_bold"
                 android:text="환영합니다!\n만나서 반가워요 :D"
                 android:textColor="@color/text_gradient_start"
-                android:textSize="32sp"
+                android:textSize="25dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
