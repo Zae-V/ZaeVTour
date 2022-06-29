@@ -23,17 +23,17 @@
                 android:id="@+id/userGreetingText"
                 android:layout_width="210dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="76dp"
+                android:layout_marginTop="25dp"
                 android:fontFamily="@font/notosans_bold"
                 android:text="제비님\n안녕하세요 :)"
                 android:textColor="@color/text_gradient_start"
-                android:textSize="32sp"/>
+                android:textSize="25dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="164dp"
                 android:orientation="vertical"
-                android:layout_marginTop="66dp" >
+                android:layout_marginTop="40dp" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
