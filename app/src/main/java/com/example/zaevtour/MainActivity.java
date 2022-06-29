@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeFragment(int index){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        navView.setVisibility(View.VISIBLE);
         switch(index){
             case 1:
                 ProfileFragment profileFragment = new ProfileFragment();
@@ -65,16 +66,18 @@ public class MainActivity extends AppCompatActivity {
                 SearchFragment2 searchFragment2 = new SearchFragment2();
                 transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment2);
                 transaction.commit();
+                navView.setVisibility(View.GONE);
                 break;
             case 5:
                 SearchFragment searchFragment = new SearchFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment);
                 transaction.commit();
+                navView.setVisibility(View.VISIBLE);
                 break;
         }
     }
 
-    public BottomNavigationView getNav() {
-        return navView;
-    }
+//    public BottomNavigationView getNav() {
+//        return navView;
+//    }
 }

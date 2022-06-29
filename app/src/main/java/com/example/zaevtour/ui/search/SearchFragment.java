@@ -38,9 +38,7 @@ public class SearchFragment extends Fragment {
         View root = binding.getRoot();
 
         MainActivity activity = (MainActivity)getActivity();
-        if (getActivity() != null && getActivity() instanceof MainActivity){
-            ((MainActivity)getActivity()).getNav().setVisibility(View.VISIBLE);
-        }
+
 
         View v = inflater.inflate(R.layout.fragment_search, container, false);
 
