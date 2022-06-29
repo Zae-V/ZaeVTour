@@ -14,6 +14,7 @@ import com.example.zaevtour.ui.search.SearchFragment2;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -21,6 +22,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.zaevtour.databinding.ActivityMainBinding;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeFragment(int index){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        this.getNav().setVisibility(View.VISIBLE);
+        navView.setVisibility(View.VISIBLE);
         switch(index){
             case 1:
                 ProfileFragment profileFragment = new ProfileFragment();
@@ -71,8 +74,37 @@ public class MainActivity extends AppCompatActivity {
             case 5:
                 SearchFragment searchFragment = new SearchFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        List fragmentList = getSupportFragmentManager().getFragments();
+
+        boolean handled = false;
+        for(Object f : fragmentList) {
+            if(f instanceof SearchFragment2) {
+                handled = ((SearchFragment2)f).onBackPressed();
+
+                if(handled) {
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    SearchFragment searchFragment = new SearchFragment();
+                    transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                    navView.setVisibility(View.VISIBLE);
+
+                    break;
+                }
+            }
+        }
+
+        if(!handled) {
+            super.onBackPressed();
         }
     }
 

@@ -1,6 +1,8 @@
 package com.example.zaevtour.ui.search;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.zaevtour.MainActivity;
@@ -32,7 +35,7 @@ public class SearchFragment2 extends Fragment {
         View root = binding.getRoot();
         MainActivity activity = (MainActivity)getActivity();
 
-        View v = inflater.inflate(R.layout.fragment_search, container, false);
+        View v = inflater.inflate(R.layout.fragment_search2, container, false);
 
 //        activity.getNav().setVisibility(View.GONE);
 
@@ -63,7 +66,6 @@ public class SearchFragment2 extends Fragment {
             @Override
             public void onClick(View view) {
                 activity.changeFragment(5);
-
             }
         });
 
@@ -73,10 +75,8 @@ public class SearchFragment2 extends Fragment {
                 Toast.makeText(getContext(),"current position", Toast.LENGTH_LONG).show();
             }
         });
-
         return root;
     }
-
 
     @Override
     public void onDestroyView() {
@@ -84,5 +84,9 @@ public class SearchFragment2 extends Fragment {
         binding = null;
     }
 
-
+    public boolean onBackPressed() {
+        if(binding == null){
+            return false;
+        }return true;
+    }
 }
