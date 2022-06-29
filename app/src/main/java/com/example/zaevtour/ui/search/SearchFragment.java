@@ -33,16 +33,13 @@ public class SearchFragment extends Fragment {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        MainActivity activity = (MainActivity)getActivity() ;
+
         Button spinnerBtn = root.findViewById(R.id.spinnerBtn);
         spinnerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Fragment searchFragment2 = new SearchFragment2();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.searchContainer, searchFragment2);
-                transaction.addToBackStack(null);
-
-                transaction.commit();
+                activity.changeFragment(4);
             }
         });
 
