@@ -265,8 +265,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
                 app:layout_constraintTop_toBottomOf="@+id/keywordText"
                 tools:layout_editor_absoluteX="35dp">
 
@@ -283,7 +283,7 @@
                     android:textColor="#E6000000"
                     android:textSize="15sp"
                     app:layout_constraintEnd_toStartOf="@+id/keywordBtn2"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -309,8 +309,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
                 app:layout_constraintTop_toBottomOf="@+id/keywordLayout1"
                 tools:layout_editor_absoluteX="35dp">
 
@@ -327,7 +327,7 @@
                     android:textColor="#E6000000"
                     android:textSize="15sp"
                     app:layout_constraintEnd_toStartOf="@+id/keywordBtn4"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -353,8 +353,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
                 app:layout_constraintTop_toBottomOf="@+id/keywordLayout2"
                 tools:layout_editor_absoluteX="35dp">
 
@@ -371,7 +371,7 @@
                     android:textColor="#E6000000"
                     android:textSize="15sp"
                     app:layout_constraintEnd_toStartOf="@+id/keywordBtn6"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
