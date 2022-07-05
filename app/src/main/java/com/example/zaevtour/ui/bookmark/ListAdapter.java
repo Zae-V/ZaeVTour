@@ -15,9 +15,9 @@ import java.util.ArrayList;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ItemViewHolder>
         implements ItemTouchHelperListener{
 
-    ArrayList<Restaurant> items = new ArrayList<>();
+    ArrayList<BookmarkItem> items = new ArrayList<>();
 
-    public ListAdapter(ArrayList<Restaurant> items){
+    public ListAdapter(ArrayList<BookmarkItem> items){
         this.items = items;
     }
 
@@ -42,8 +42,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ItemViewHolder
         return items.size();
     }
 
-    public void addItem(Restaurant restaurant){
-        items.add(restaurant);
+    public void addItem(BookmarkItem bookmarkItem){
+        items.add(bookmarkItem);
     }
 
 
@@ -51,11 +51,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ItemViewHolder
     @Override
     public boolean onItemMove(int from_position, int to_position) {
         //이동할 객체 저장
-        Restaurant restaurant = items.get(from_position);
+        BookmarkItem bookmarkItem = items.get(from_position);
         //이동할 객체 삭제
         items.remove(from_position);
         //이동하고 싶은 position에 추가
-        items.add(to_position,restaurant);
+        items.add(to_position, bookmarkItem);
 
         //Adapter에 데이터 이동알림
         notifyItemMoved(from_position,to_position);
@@ -83,11 +83,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ItemViewHolder
             list_image = itemView.findViewById(R.id.list_image);
         }
 
-        public void onBind(Restaurant restaurant) {
-            list_name.setText(restaurant.getName());
-            list_location.setText(String.valueOf(restaurant.getLocation()));
-            list_hours.setText(String.valueOf(restaurant.getHours()));
-            list_image.setImageResource(restaurant.getImage());
+        public void onBind(BookmarkItem bookmarkItem) {
+            list_name.setText(bookmarkItem.getName());
+            list_location.setText(String.valueOf(bookmarkItem.getLocation()));
+            list_hours.setText(String.valueOf(bookmarkItem.getHours()));
+            list_image.setImageResource(bookmarkItem.getImage());
         }
     }
 }

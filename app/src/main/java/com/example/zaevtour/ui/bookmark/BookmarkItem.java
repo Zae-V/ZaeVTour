@@ -1,12 +1,12 @@
 package com.example.zaevtour.ui.bookmark;
 
-public class Restaurant {
+public class BookmarkItem {
     int image;
     String name;
     String location;
     String hours;
 
-    public Restaurant(int image, String name, String location, String hours){
+    public BookmarkItem(int image, String name, String location, String hours){
         this.image = image;
         this.name = name;
         this.location = location;
