@@ -16,9 +16,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
@@ -28,6 +34,8 @@ import kotlin.jvm.functions.Function2;
 
 public class IntroActivity extends AppCompatActivity {
     private static final String TAG = "로그인";
+    private FirebaseAuth mAuth;
+
     Animation fadeIn;
     TextView introText;
     Button kakaoJoinBtn;
@@ -44,6 +52,8 @@ public class IntroActivity extends AppCompatActivity {
         Glide.with(this).load(R.raw.animation_bird).into(introImg);
         kakaoJoinBtn = findViewById(R.id.kakaoJoinBtn);
         joinBtn = findViewById(R.id.joinBtn);
+
+        mAuth = FirebaseAuth.getInstance();
 
         // 제비 글자색 바꾸기
         String content = introText.getText().toString();
@@ -94,9 +104,17 @@ public class IntroActivity extends AppCompatActivity {
                                 Log.d(TAG, "invoke: id=" + user.getId());
                                 Log.d(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
 
-                                Intent intent = new Intent(IntroActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            } else {
+                                String email = user.getKakaoAccount().getEmail();
+                                String password = user.getId() + user.getKakaoAccount().getEmail();
+
+                                // 이메일 중복 체크 필요
+                                // 이메일 중복 O -> 로그인 시도
+                                    // 1. 성공
+                                    // 2. 실패 - 다른 사람의 아이디 ->  이미 가입된 이메일이 있습니다.
+                                // 이메일 중복 X
+                                    // 계정 생성
+
+                                signUp(email, password);
 
                             }
                             if (throwable != null) {
@@ -130,6 +148,41 @@ public class IntroActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(IntroActivity.this, SignActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    public void signIn(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(IntroActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Log.d(TAG, "로그인 성공");
+                    Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }else{
+                    Log.d(TAG, "로그인 실패");
+                    Log.d(TAG, String.valueOf(task.getException()));
+                }
+            }
+        });
+    }
+
+    public void signUp(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(IntroActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "회원가입 성공");
+                    Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Log.d(TAG, "회원가입 실패");
+                    Log.d(TAG, String.valueOf(task.getException()));
+
+                    Log.d(TAG, "로그인 시도");
+                    signIn(email, password);
+                }
             }
         });
     }
