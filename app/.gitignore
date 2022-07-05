@@ -243,4 +243,6 @@ fabric.properties
 
 !/gradle/wrapper/gradle-wrapper.jar
 
+/app/src/main/res/values/kakao_app_key.xml
+
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,androidstudio,android,java
