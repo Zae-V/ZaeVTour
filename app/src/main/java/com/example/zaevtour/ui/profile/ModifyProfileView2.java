@@ -24,7 +24,7 @@ public class ModifyProfileView2 extends Fragment {
 
         // 텍스트 Gradient 적용
         TextView textView = v.findViewById(R.id.profileText);
-        Tvg.change(textView, Color.parseColor("#8CEDB3"), Color.parseColor("#6C92F4"));
+        Tvg.change(textView, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
 
         MainActivity activity = (MainActivity)getActivity();
 
