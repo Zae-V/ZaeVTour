@@ -14,12 +14,20 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.kakao.sdk.auth.model.OAuthToken;
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.User;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 public class IntroActivity extends AppCompatActivity {
+    private static final String TAG = "로그인";
     Animation fadeIn;
     TextView introText;
     Button kakaoJoinBtn;
@@ -75,11 +83,45 @@ public class IntroActivity extends AppCompatActivity {
         });
         introText.startAnimation(fadeIn);
 
+        Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
+            @Override
+            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+                if (oAuthToken != null) {
+                    UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+                        @Override
+                        public Unit invoke(User user, Throwable throwable) {
+                            if (user != null) {
+                                Log.d(TAG, "invoke: id=" + user.getId());
+                                Log.d(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
+
+                                Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            } else {
+
+                            }
+                            if (throwable != null) {
+                                Log.d(TAG, "invoke: " + throwable.getLocalizedMessage());
+                            }
+                            return null;
+                        }
+                    });
+                }
+                if (throwable != null) {
+                    // TBD
+                    Log.d(TAG, "invoke: " + throwable.getLocalizedMessage());
+                }
+                return null;
+            }
+        };
+
         kakaoJoinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(IntroActivity.this, MainActivity.class);
-                startActivity(intent);
+                if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(IntroActivity.this)) {
+                    UserApiClient.getInstance().loginWithKakaoTalk(IntroActivity.this, callback);
+                } else {
+                    UserApiClient.getInstance().loginWithKakaoAccount(IntroActivity.this, callback);
+                }
             }
         });
 
