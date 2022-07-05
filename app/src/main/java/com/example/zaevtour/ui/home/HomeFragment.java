@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment {
         TextView textView = v.findViewById(R.id.titleText);
         Tvg.change(textView, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
 
+
         return v;
     }
 
