@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.zaevtour">
 
+
     <!-- 인터넷 사용 권한 설정-->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
 
     <application
         android:allowBackup="true"
@@ -17,11 +20,11 @@
         android:theme="@style/Theme.ZaeVTour"
         tools:targetApi="31"
         android:name=".GlobalApplication">
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan"
-
             >
         </activity>
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
@@ -47,6 +50,15 @@
         <activity
             android:name=".SignActivity"
             android:exported="true">
+        </activity>
+        <activity android:name=".PlaceActivity"
+            android:networkSecurityConfig="@xml/network_config">
+        </activity>
+        <activity android:name=".PloggingActivity"
+            android:networkSecurityConfig="@xml/network_config">
+        </activity>
+        <activity android:name=".VeganActivity"
+            android:networkSecurityConfig="@xml/network_config">
         </activity>
     </application>
 </manifest>

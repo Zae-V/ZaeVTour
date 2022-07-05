@@ -1,5 +1,6 @@
 package com.example.zaevtour.ui.sign;
 
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -22,6 +23,11 @@ import com.example.zaevtour.IntroActivity;
 import com.example.zaevtour.MainActivity;
 import com.example.zaevtour.R;
 import com.example.zaevtour.SignActivity;
+import com.example.zaevtour.ui.home.HomeFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignInFragment extends Fragment {
 
@@ -34,6 +40,9 @@ public class SignInFragment extends Fragment {
     EditText editPW;
 
     Button signInBtn;
+    TextView msg;
+
+    private FirebaseAuth mAuth;
 
     private SignInViewModel mViewModel;
 
@@ -54,10 +63,27 @@ public class SignInFragment extends Fragment {
         editPW = v.findViewById(R.id.editPW);
 
         signInBtn = v.findViewById(R.id.signInBtn);
+        msg = v.findViewById(R.id.error_message);
+
+        mAuth = FirebaseAuth.getInstance();
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String email = editID.getText().toString().trim();
+                String pwd = editPW.getText().toString().trim();
+
+                mAuth.signInWithEmailAndPassword(email,pwd).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                        }else{
+                            msg.setText("이메일과 비밀번호를 확인해주십시오.");
+                        }
+                    }
+                });
 
             }
         });
