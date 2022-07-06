@@ -28,16 +28,12 @@ public class SearchFragment2 extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SearchViewModel searchViewModel =
-                new ViewModelProvider(this).get(SearchViewModel.class);
 
         binding = FragmentSearch2Binding.inflate(inflater, container, false);
         View root = binding.getRoot();
         MainActivity activity = (MainActivity)getActivity();
 
         View v = inflater.inflate(R.layout.fragment_search2, container, false);
-
-//        activity.getNav().setVisibility(View.GONE);
 
         String[] CityName = {"전체","강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구",
         "동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","종구","중랑구"};
@@ -62,7 +58,7 @@ public class SearchFragment2 extends Fragment {
             }
         });
 
-        binding.backBtn.setOnClickListener(new View.OnClickListener() {
+        binding.back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 activity.changeFragment(5);

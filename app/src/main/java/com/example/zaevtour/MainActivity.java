@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     SearchFragment searchFragment = new SearchFragment();
                     transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment);
-                    transaction.addToBackStack(null);
                     transaction.commit();
                     navView.setVisibility(View.VISIBLE);
 

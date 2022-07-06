@@ -11,32 +11,29 @@
     <LinearLayout
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:gravity="center_horizontal|center_vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
         >
 
-        <ImageView
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/arrow_back"
-            app:layout_constraintStart_toStartOf="parent"
-            android:clickable="true"
-            android:focusable="true"
-            />
-
-        <EditText
+        <androidx.appcompat.widget.SearchView
             android:id="@+id/search"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:background="@drawable/rectangle"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:elevation="4dp"
-            android:drawableRight="@drawable/search_button" />
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/profile_rounded_shape"
+            android:elevation="3dp"
+            android:orientation="horizontal"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            app:queryHint="검색어를 입력하세요"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerBtn"
+            app:layout_constraintBottom_toTopOf="@id/categoryText"
+            app:searchIcon="@drawable/ic_search" />
 
 
 
@@ -49,7 +46,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bar"
         android:paddingHorizontal="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <TextView
             android:id="@+id/title"
@@ -66,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
-            android:horizontalSpacing="10dp"
+            android:horizontalSpacing="7dp"
             android:numColumns="4"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -86,17 +84,28 @@
 
     <GridView
         android:id="@+id/allList"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginTop="20dp"
         android:paddingHorizontal="20dp"
-        android:horizontalSpacing="10dp"
+        android:horizontalSpacing="7dp"
         android:verticalSpacing="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recentBar"
         android:numColumns="4"/>
 
+    <ImageView
+        android:id="@+id/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginBottom="50dp"
+        />
 
 
 
