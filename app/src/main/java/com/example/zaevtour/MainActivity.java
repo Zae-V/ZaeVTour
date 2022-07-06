@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 SearchFragment2 searchFragment2 = new SearchFragment2();
                 transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment2);
                 navView.setVisibility(View.GONE);
+                transaction.setCustomAnimations(R.anim.enter_from_top,R.anim.exit_to_top,R.anim.enter_from_top,R.anim.exit_to_top);
                 transaction.commit();
                 break;
             case 5:
