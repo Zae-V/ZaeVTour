@@ -29,6 +29,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class SignInFragment extends Fragment {
 
     TextView userGreetingText;
@@ -77,8 +79,12 @@ public class SignInFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(intent);
+                            if(!Objects.requireNonNull(mAuth.getCurrentUser()).isEmailVerified()){
+                                msg.setText("이메일 인증을 완료해주십시오.");
+                            }else{
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                startActivity(intent);
+                            }
                         }else{
                             msg.setText("이메일과 비밀번호를 확인해주십시오.");
                         }

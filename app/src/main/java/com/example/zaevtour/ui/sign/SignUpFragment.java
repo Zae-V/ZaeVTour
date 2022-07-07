@@ -25,6 +25,7 @@ import com.example.zaevtour.R;
 import com.example.zaevtour.SignActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -81,6 +82,15 @@ public class SignUpFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                user.sendEmailVerification().addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(getActivity(),"인증 이메일이 전송되었습니다.",Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                });
                                 Intent intent = new Intent(getActivity(), SignActivity.class);
                                 startActivity(intent);
                             } else {
