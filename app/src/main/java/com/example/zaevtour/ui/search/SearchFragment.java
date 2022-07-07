@@ -2,14 +2,17 @@ package com.example.zaevtour.ui.search;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.zaevtour.MainActivity;
@@ -23,11 +26,10 @@ import com.example.zaevtour.databinding.FragmentSearchBinding;
 public class SearchFragment extends Fragment {
 
     private FragmentSearchBinding binding;
+    private String select;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SearchViewModel searchViewModel =
-                new ViewModelProvider(this).get(SearchViewModel.class);
 
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -35,6 +37,18 @@ public class SearchFragment extends Fragment {
         MainActivity activity = (MainActivity)getActivity() ;
 
         Button spinnerBtn = root.findViewById(R.id.spinnerBtn);
+
+        final Observer<String> selectObserver = new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable final String s) {
+                spinnerBtn.setText(s);
+            }
+        };
+
+        SharedViewModel searchViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        searchViewModel.getMessage().observe(getViewLifecycleOwner(), selectObserver);
+
+
         spinnerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

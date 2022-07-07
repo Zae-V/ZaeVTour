@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.zaevtour.MainActivity;
@@ -33,6 +34,8 @@ public class SearchFragment2 extends Fragment {
         View root = binding.getRoot();
         MainActivity activity = (MainActivity)getActivity();
 
+        SharedViewModel searchViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
         View v = inflater.inflate(R.layout.fragment_search2, container, false);
 
         String[] CityName = {"전체","강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구",
@@ -40,12 +43,14 @@ public class SearchFragment2 extends Fragment {
         String[] Visited = {"강남구","관악구","구로구"};
 
 
+
         CityAdapter cityAdapter = new CityAdapter((getContext()),CityName);
         binding.allList.setAdapter(cityAdapter);
         binding.allList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getContext(),CityName[i]+"을 선택하셨습니다.", Toast.LENGTH_LONG).show();
+                searchViewModel.sendMessage(CityName[i]);
+                activity.changeFragment(5);
             }
         });
 
