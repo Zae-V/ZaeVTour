@@ -24,8 +24,8 @@
     tools:layout="@layout/fragment_bookmark" />
 
 <fragment
-    android:id="@+id/navigation_notifications"
-    android:name="com.example.zaevtour.ui.profile.ProfileFragment"
-    android:label="@string/title_profile"
+    android:id="@+id/navigation_schedule"
+    android:name="com.example.zaevtour.ui.Schedule.ScheduleFragment"
+    android:label="@string/title_schedule"
     tools:layout="@layout/fragment_profile" />
 </navigation>

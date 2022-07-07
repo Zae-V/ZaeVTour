@@ -17,8 +17,8 @@
         android:title="@string/title_bookmark" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_schedule"
         android:icon="@drawable/ic_baseline_date_range_24"
-        android:title="@string/title_profile" />
+        android:title="@string/title_schedule" />
 
 </menu>
