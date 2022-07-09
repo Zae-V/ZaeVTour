@@ -11,10 +11,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,10 +22,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
@@ -35,6 +38,7 @@ import kotlin.jvm.functions.Function2;
 public class IntroActivity extends AppCompatActivity {
     private static final String TAG = "로그인";
     private FirebaseAuth mAuth;
+    private FirebaseFirestore mFirestore;
 
     Animation fadeIn;
     TextView introText;
@@ -54,6 +58,7 @@ public class IntroActivity extends AppCompatActivity {
         joinBtn = findViewById(R.id.joinBtn);
 
         mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
 
         // 제비 글자색 바꾸기
         String content = introText.getText().toString();
@@ -104,8 +109,13 @@ public class IntroActivity extends AppCompatActivity {
                                 Log.d(TAG, "invoke: id=" + user.getId());
                                 Log.d(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
 
-                                String email = user.getKakaoAccount().getEmail();
-                                String password = user.getId() + user.getKakaoAccount().getEmail();
+                                String userName = user.getKakaoAccount().getProfile().getNickname();
+                                String userEmail = user.getKakaoAccount().getEmail();
+                                String userPassword = user.getId() + user.getKakaoAccount().getEmail();
+                                ArrayList bookmarkList = new ArrayList();
+                                ArrayList currentPosition = new ArrayList();
+                                String profileImage = user.getKakaoAccount().getProfile().getProfileImageUrl();
+                                Boolean notification = false;
 
                                 // 이메일 중복 체크 필요
                                 // 이메일 중복 O -> 로그인 시도
@@ -114,7 +124,9 @@ public class IntroActivity extends AppCompatActivity {
                                 // 이메일 중복 X
                                     // 계정 생성
 
-                                signUp(email, password);
+                                Users newUser = new Users(userName, userEmail, bookmarkList, currentPosition, profileImage, notification);
+                                mFirestore.collection("User").document().set(newUser);
+//                                signUp(userEmail, userPassword);
 
                             }
                             if (throwable != null) {
