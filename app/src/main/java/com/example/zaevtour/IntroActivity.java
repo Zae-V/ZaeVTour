@@ -1,6 +1,8 @@
 package com.example.zaevtour;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -41,6 +43,9 @@ public class IntroActivity extends AppCompatActivity {
     private static final String TAG = "로그인";
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     Animation fadeIn;
     TextView introText;
@@ -175,19 +180,20 @@ public class IntroActivity extends AppCompatActivity {
         });
     }
 
-    public void signIn(String email, String password) {
+    public void signIn(String email, String password, Users user) {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(IntroActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Log.d(TAG, "로그인 성공");
+                    saveUserInfo(user.userName, user.userEmail);
                     Intent intent = new Intent(IntroActivity.this, MainActivity.class);
                     startActivity(intent);
                 }else{
                     Log.d(TAG, "로그인 실패");
                     Log.d(TAG, String.valueOf(task.getException()));
 
-                    Toast.makeText(getApplicationContext(), "이미 존재하는 아이디가 있습니다!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "이미 존재하는 이메일이 있습니다.", Toast.LENGTH_SHORT).show();
                     // 이미 아이디 존재할 때 따로 처리 //
                 }
             }
@@ -201,6 +207,7 @@ public class IntroActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "회원가입 성공");
                     mFirestore.collection("User").document(user.userEmail).set(user);
+                    saveUserInfo(user.userName, user.userEmail);
 
                     Intent intent = new Intent(IntroActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -212,10 +219,21 @@ public class IntroActivity extends AppCompatActivity {
         });
     }
 
+    public void saveUserInfo(String userName, String userEmail) {
+        Log.d(TAG, "사용자 정보를 저장합니다.");
+        sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        editor.putString("userName", userName);
+        editor.putString("userEmail", userEmail);
+
+        editor.commit();
+    }
+
     public void checkedEmailDuplicate(Boolean emailDuplicated, String email, String password, Users user) {
         if (emailDuplicated) {
             Log.d(TAG, "중복된 이메일이 있습니다");
-            signIn(email, password);
+            signIn(email, password, user);
         } else {
             Log.d(TAG, "중복된 이메일이 없습니다.");
             signUp(email, password, user);

@@ -1,5 +1,7 @@
 package com.example.zaevtour.ui.profile;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,14 +19,35 @@ import com.example.zaevtour.MainActivity;
 import com.example.zaevtour.R;
 
 public class ModifyProfileView extends Fragment {
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
+    String userName;
+    String userEmail;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.modify_profile_view, container, false);
 
+        sharedPreferences = getContext().getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        userName = sharedPreferences.getString("userName", "데이터 없음");
+        userEmail = sharedPreferences.getString("userEmail", "데이터 없음");
+
         // 텍스트 Gradient 적용
         TextView textView = v.findViewById(R.id.profileText);
         Tvg.change(textView, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
+
+        TextView mainNameTextView = v.findViewById(R.id.mainNameTextView);
+        mainNameTextView.setText(userName);
+
+        TextView nameTextView = v.findViewById(R.id.nameTextView);
+        nameTextView.setText(userName);
+
+        TextView emailTextView = v.findViewById(R.id.emailTextView);
+        emailTextView.setText(userEmail);
 
         MainActivity activity = (MainActivity)getActivity();
 
