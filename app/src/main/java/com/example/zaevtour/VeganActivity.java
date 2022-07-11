@@ -54,7 +54,7 @@ public class VeganActivity extends AppCompatActivity {
         String str= edit.getText().toString();//EditText에 작성된 Text얻어오기
         String location = URLEncoder.encode(str);
         String query="%EC%A0%84%EB%A0%A5%EB%A1%9C";
-        String key="656e675a4b616461393949554e4169";
+        String key= getString(R.string.vegan_key);
         String address = "http://openapi.seoul.go.kr:8088/";
         String listType = "CrtfcUpsoInfo";
         String startIndex = "1";

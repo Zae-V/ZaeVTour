@@ -54,7 +54,7 @@ public class PlaceActivity extends AppCompatActivity {
         String str= edit.getText().toString();//EditText에 작성된 Text얻어오기
         String location = URLEncoder.encode(str);
         String query="%EC%A0%84%EB%A0%A5%EB%A1%9C";
-        String key="lWATJCuA8E%2FENcTPyhkd%2Fb0rQWfZOWRcB58jRjd6FphwtghA1QsUobr3WoYi%2FJgLFcyplwdzKbKrv7Jo4G9aMw%3D%3D";
+        String key = getString(R.string.portal_key);
         String address = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/";
         String listType = "areaBasedList";
         String pageNo = "1";
