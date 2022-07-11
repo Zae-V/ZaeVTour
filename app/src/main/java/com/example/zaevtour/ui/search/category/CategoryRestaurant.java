@@ -28,11 +28,11 @@ public class CategoryRestaurant {
         this.name = name;
     }
 
-    public String getLocation() {
+    public String getMenu() {
         return menu;
     }
 
-    public void setLocation(String menu) {
+    public void setMenu(String menu) {
         this.menu = menu;
     }
 

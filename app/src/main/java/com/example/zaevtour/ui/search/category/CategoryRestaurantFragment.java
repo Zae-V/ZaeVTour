@@ -67,6 +67,11 @@ public class CategoryRestaurantFragment extends Fragment {
         restaurantsList.add(new CategoryRestaurant(R.drawable.vegan_burger,"비건 버거","버섯 버거, 콩 버거"));
         restaurantsList.add(new CategoryRestaurant(R.drawable.vegan_burger,"비건 버거","버섯 버거, 콩 버거"));
         restaurantsList.add(new CategoryRestaurant(R.drawable.vegan_burger,"비건 버거","버섯 버거, 콩 버거"));
+        restaurantsList.add(new CategoryRestaurant(R.drawable.vegan_burger,"비건 버거","버섯 버거, 콩 버거"));
+        restaurantsList.add(new CategoryRestaurant(R.drawable.vegan_burger,"비건 버거","버섯 버거, 콩 버거"));
+        restaurantsList.add(new CategoryRestaurant(R.drawable.vegan_burger,"비건 버거","버섯 버거, 콩 버거"));
+        restaurantsList.add(new CategoryRestaurant(R.drawable.vegan_burger,"비건 버거","버섯 버거, 콩 버거"));
+        restaurantsList.add(new CategoryRestaurant(R.drawable.vegan_burger,"비건 버거","버섯 버거, 콩 버거"));
     }
     
     @Override

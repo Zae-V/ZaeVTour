@@ -72,8 +72,11 @@ public class SearchFragment extends Fragment {
         restaurantBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), VeganActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), VeganActivity.class);
+//                startActivity(intent);
+                  activity.changeFragment(6);
+                  //Go to Category_Restaurant
+
             }
         });
 //        final TextView textView = binding.textProfile;

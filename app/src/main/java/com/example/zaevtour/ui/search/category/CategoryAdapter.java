@@ -29,7 +29,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemVi
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //LayoutInflater를 이용해서 원하는 레이아웃을 띄워줌
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.list_bookmark, parent, false);
+        View view = inflater.inflate(R.layout.list_restaurant, parent, false);
         return new ItemViewHolder(view);
     }
 
@@ -44,8 +44,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemVi
         return items.size();
     }
 
-    public void addItem(CategoryRestaurant bookmarkItem){
-        items.add(bookmarkItem);
+    public void addItem(CategoryRestaurant categoryRestaurant){
+        items.add(categoryRestaurant);
     }
 
 
@@ -53,11 +53,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemVi
     @Override
     public boolean onItemMove(int from_position, int to_position) {
         //이동할 객체 저장
-        CategoryRestaurant bookmarkItem = items.get(from_position);
+        CategoryRestaurant categoryRestaurant = items.get(from_position);
         //이동할 객체 삭제
         items.remove(from_position);
         //이동하고 싶은 position에 추가
-        items.add(to_position, bookmarkItem);
+        items.add(to_position, categoryRestaurant);
 
         //Adapter에 데이터 이동알림
         notifyItemMoved(from_position,to_position);
@@ -72,22 +72,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemVi
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        TextView list_name,list_menu;
+        TextView list_name, list_menu;
         ImageView list_image;
-
-
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            list_name = itemView.findViewById(R.id.list_name);
-            list_menu = itemView.findViewById(R.id.list_menu);
+            list_name = (TextView) itemView.findViewById(R.id.list_name);
+            list_menu = (TextView) itemView.findViewById(R.id.list_menu);
             list_image = itemView.findViewById(R.id.list_image);
         }
 
-        public void onBind(CategoryRestaurant bookmarkItem) {
-            list_name.setText(bookmarkItem.getName());
-            list_menu.setText(String.valueOf(bookmarkItem.getLocation()));
-            list_image.setImageResource(bookmarkItem.getImage());
+        public void onBind(CategoryRestaurant categoryRestaurant) {
+            list_name.setText(categoryRestaurant.getName());
+            list_menu.setText(categoryRestaurant.getMenu());
+            list_image.setImageResource(categoryRestaurant.getImage());
         }
     }
 }
