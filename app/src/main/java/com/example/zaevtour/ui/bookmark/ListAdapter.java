@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.zaevtour.R;
 
 import java.util.ArrayList;
@@ -20,7 +21,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ItemViewHolder
     public ListAdapter(ArrayList<BookmarkItem> items){
         this.items = items;
     }
-
 
     @NonNull
     @Override

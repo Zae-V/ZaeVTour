@@ -25,7 +25,7 @@
 
 <fragment
     android:id="@+id/navigation_schedule"
-    android:name="com.example.zaevtour.ui.Schedule.ScheduleFragment"
+    android:name="com.example.zaevtour.ui.travel.TravelFragment"
     android:label="@string/title_schedule"
     tools:layout="@layout/fragment_profile" />
 </navigation>
