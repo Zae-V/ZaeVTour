@@ -135,9 +135,9 @@ public class IntroActivity extends AppCompatActivity {
                                             if (task.isSuccessful()) {
                                                 DocumentSnapshot document = task.getResult();
                                                 if (document.exists()) {
-                                                    checkedEmailDuplicate(true, userEmail, userPassword, newUser);
+                                                    checkedEmailDuplicate(true, newUser, userPassword);
                                                 } else {
-                                                    checkedEmailDuplicate(false, userEmail, userPassword, newUser);
+                                                    checkedEmailDuplicate(false, newUser, userPassword);
                                                 }
                                             } else {
                                                 Log.d(TAG, "get failed with ", task.getException());
@@ -180,13 +180,13 @@ public class IntroActivity extends AppCompatActivity {
         });
     }
 
-    public void signIn(String email, String password, Users user) {
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(IntroActivity.this, new OnCompleteListener<AuthResult>() {
+    public void signIn(Users user, String password) {
+        mAuth.signInWithEmailAndPassword(user.userEmail, password).addOnCompleteListener(IntroActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Log.d(TAG, "로그인 성공");
-                    saveUserInfo(user.userName, user.userEmail);
+                    saveUserInfo(user);
                     Intent intent = new Intent(IntroActivity.this, MainActivity.class);
                     startActivity(intent);
                 }else{
@@ -200,14 +200,14 @@ public class IntroActivity extends AppCompatActivity {
         });
     }
 
-    public void signUp(String email, String password, Users user) {
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(IntroActivity.this, new OnCompleteListener<AuthResult>() {
+    public void signUp(Users user, String password) {
+        mAuth.createUserWithEmailAndPassword(user.userEmail, password).addOnCompleteListener(IntroActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "회원가입 성공");
                     mFirestore.collection("User").document(user.userEmail).set(user);
-                    saveUserInfo(user.userName, user.userEmail);
+                    saveUserInfo(user);
 
                     Intent intent = new Intent(IntroActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -219,24 +219,24 @@ public class IntroActivity extends AppCompatActivity {
         });
     }
 
-    public void saveUserInfo(String userName, String userEmail) {
+    public void saveUserInfo(Users user) {
         Log.d(TAG, "사용자 정보를 저장합니다.");
         sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        editor.putString("userName", userName);
-        editor.putString("userEmail", userEmail);
+        editor.putString("userName", user.userName);
+        editor.putString("userEmail", user.userEmail);
 
         editor.commit();
     }
 
-    public void checkedEmailDuplicate(Boolean emailDuplicated, String email, String password, Users user) {
+    public void checkedEmailDuplicate(Boolean emailDuplicated,Users user, String password) {
         if (emailDuplicated) {
             Log.d(TAG, "중복된 이메일이 있습니다");
-            signIn(email, password, user);
+            signIn(user, password);
         } else {
             Log.d(TAG, "중복된 이메일이 없습니다.");
-            signUp(email, password, user);
+            signUp(user, password);
         }
     }
 }

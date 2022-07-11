@@ -30,7 +30,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosans_bold"
-                    android:text="제비님 \n여행을 떠나볼까요?"
                     android:layout_marginLeft="30dp"
                     android:textSize="25dp"
                     android:layout_weight="9"/>

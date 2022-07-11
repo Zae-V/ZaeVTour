@@ -1,5 +1,7 @@
 package com.example.zaevtour.ui.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,18 +21,28 @@ import com.example.zaevtour.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
+    String userName;
+    String titleText;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        HomeViewModel homeViewModel =
-//                new ViewModelProvider(this).get(HomeViewModel.class);
+
+        sharedPreferences = getContext().getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        userName = sharedPreferences.getString("userName", "데이터 없음");
 
         // 텍스트 Gradient 적용
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-        TextView textView = v.findViewById(R.id.titleText);
-        Tvg.change(textView, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
+        TextView titleTextView = v.findViewById(R.id.titleText);
 
+        titleText = userName + "님" + "\n여행을 떠나볼까요?";
+        titleTextView.setText(titleText);
+
+        Tvg.change(titleTextView, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
 
         MainActivity activity = (MainActivity) getActivity();
         ImageView profile = v.findViewById(R.id.profileImage);
@@ -42,13 +54,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         return v;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 }
