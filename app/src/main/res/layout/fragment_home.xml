@@ -29,8 +29,6 @@
                     android:id="@+id/titleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_weight="9"
                     android:fontFamily="@font/notosans_bold"
                     android:layout_marginLeft="30dp"
                     android:textSize="25dp"
