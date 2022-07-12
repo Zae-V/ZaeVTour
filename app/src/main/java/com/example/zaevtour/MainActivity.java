@@ -84,12 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
-            case 7:
-                DetailRestaurantFragment detailRestaurantFragmentRestaurantFragment = new DetailRestaurantFragment();
-                transaction.replace(R.id.nav_host_fragment_activity_main,detailRestaurantFragmentRestaurantFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                break;
         }
     }
 
