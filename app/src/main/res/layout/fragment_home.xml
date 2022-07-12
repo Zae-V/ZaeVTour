@@ -32,8 +32,9 @@
                     android:layout_marginLeft="30dp"
                     android:layout_weight="9"
                     android:fontFamily="@font/notosans_bold"
-                    android:text="제비님 \n여행을 떠나볼까요?"
-                    android:textSize="25dp" />
+                    android:layout_marginLeft="30dp"
+                    android:textSize="25dp"
+                    android:layout_weight="9"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profileImage"

@@ -1,6 +1,8 @@
 package com.example.zaevtour;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -11,7 +13,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,10 +25,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
@@ -35,6 +42,10 @@ import kotlin.jvm.functions.Function2;
 public class IntroActivity extends AppCompatActivity {
     private static final String TAG = "로그인";
     private FirebaseAuth mAuth;
+    private FirebaseFirestore mFirestore;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     Animation fadeIn;
     TextView introText;
@@ -54,6 +65,7 @@ public class IntroActivity extends AppCompatActivity {
         joinBtn = findViewById(R.id.joinBtn);
 
         mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
 
         // 제비 글자색 바꾸기
         String content = introText.getText().toString();
@@ -104,18 +116,34 @@ public class IntroActivity extends AppCompatActivity {
                                 Log.d(TAG, "invoke: id=" + user.getId());
                                 Log.d(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
 
-                                String email = user.getKakaoAccount().getEmail();
-                                String password = user.getId() + user.getKakaoAccount().getEmail();
+                                String userName = user.getKakaoAccount().getProfile().getNickname();
+                                String userEmail = user.getKakaoAccount().getEmail();
+                                String userPassword = user.getId() + user.getKakaoAccount().getEmail();
+                                ArrayList bookmarkList = new ArrayList();
+                                ArrayList currentPosition = new ArrayList();
+                                String profileImage = user.getKakaoAccount().getProfile().getProfileImageUrl();
+                                Boolean notification = false;
 
-                                // 이메일 중복 체크 필요
-                                // 이메일 중복 O -> 로그인 시도
-                                    // 1. 성공
-                                    // 2. 실패 - 다른 사람의 아이디 ->  이미 가입된 이메일이 있습니다.
-                                // 이메일 중복 X
-                                    // 계정 생성
+                                Users newUser = new Users(userName, userEmail, bookmarkList, currentPosition, profileImage, notification);
 
-                                signUp(email, password);
-
+                                // 이메일 중복 체크
+                                mFirestore.collection("User").document(userEmail)
+                                        .get().
+                                        addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                DocumentSnapshot document = task.getResult();
+                                                if (document.exists()) {
+                                                    checkedEmailDuplicate(true, newUser, userPassword);
+                                                } else {
+                                                    checkedEmailDuplicate(false, newUser, userPassword);
+                                                }
+                                            } else {
+                                                Log.d(TAG, "get failed with ", task.getException());
+                                            }
+                                        }
+                                    });
                             }
                             if (throwable != null) {
                                 Log.d(TAG, "invoke: " + throwable.getLocalizedMessage());
@@ -152,38 +180,63 @@ public class IntroActivity extends AppCompatActivity {
         });
     }
 
-    public void signIn(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(IntroActivity.this, new OnCompleteListener<AuthResult>() {
+    public void signIn(Users user, String password) {
+        mAuth.signInWithEmailAndPassword(user.userEmail, password).addOnCompleteListener(IntroActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Log.d(TAG, "로그인 성공");
+                    saveUserInfo(user);
                     Intent intent = new Intent(IntroActivity.this, MainActivity.class);
                     startActivity(intent);
                 }else{
                     Log.d(TAG, "로그인 실패");
+                    Log.d(TAG, String.valueOf(task.getException()));
+
+                    Toast.makeText(getApplicationContext(), "이미 존재하는 이메일이 있습니다.", Toast.LENGTH_SHORT).show();
+                    // 이미 아이디 존재할 때 따로 처리 //
+                }
+            }
+        });
+    }
+
+    public void signUp(Users user, String password) {
+        mAuth.createUserWithEmailAndPassword(user.userEmail, password).addOnCompleteListener(IntroActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "회원가입 성공");
+                    mFirestore.collection("User").document(user.userEmail).set(user);
+                    saveUserInfo(user);
+
+                    Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Log.d(TAG, "회원가입 실패");
                     Log.d(TAG, String.valueOf(task.getException()));
                 }
             }
         });
     }
 
-    public void signUp(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(IntroActivity.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Log.d(TAG, "회원가입 성공");
-                    Intent intent = new Intent(IntroActivity.this, MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    Log.d(TAG, "회원가입 실패");
-                    Log.d(TAG, String.valueOf(task.getException()));
+    public void saveUserInfo(Users user) {
+        Log.d(TAG, "사용자 정보를 저장합니다.");
+        sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
-                    Log.d(TAG, "로그인 시도");
-                    signIn(email, password);
-                }
-            }
-        });
+        editor.putString("userName", user.userName);
+        editor.putString("userEmail", user.userEmail);
+
+        editor.commit();
+    }
+
+    public void checkedEmailDuplicate(Boolean emailDuplicated,Users user, String password) {
+        if (emailDuplicated) {
+            Log.d(TAG, "중복된 이메일이 있습니다");
+            signIn(user, password);
+        } else {
+            Log.d(TAG, "중복된 이메일이 없습니다.");
+            signUp(user, password);
+        }
     }
 }
