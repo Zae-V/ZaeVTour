@@ -12,6 +12,7 @@ import com.example.zaevtour.ui.profile.ProfileFragment;
 import com.example.zaevtour.ui.search.SearchFragment;
 import com.example.zaevtour.ui.search.SearchFragment2;
 import com.example.zaevtour.ui.search.category.CategoryRestaurantFragment;
+import com.example.zaevtour.ui.search.detail.DetailRestaurantFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -79,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
                 transaction.commit();
                 break;
             case 6:
-                CategoryRestaurantFragment categoryRestaurantFragment = new CategoryRestaurantFragment();
-                transaction.replace(R.id.nav_host_fragment_activity_main,categoryRestaurantFragment);
+                DetailRestaurantFragment detailRestaurantFragmentRestaurantFragment = new DetailRestaurantFragment();
+                transaction.replace(R.id.nav_host_fragment_activity_main,detailRestaurantFragmentRestaurantFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
