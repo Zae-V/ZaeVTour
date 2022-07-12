@@ -14,10 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.captaindroid.tvg.Tvg;
 import com.example.zaevtour.MainActivity;
 import com.example.zaevtour.R;
 import com.example.zaevtour.databinding.FragmentHomeBinding;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment {
 
@@ -26,6 +29,7 @@ public class HomeFragment extends Fragment {
 
     String userName;
     String titleText;
+    String userProfileImage;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +38,7 @@ public class HomeFragment extends Fragment {
         editor = sharedPreferences.edit();
 
         userName = sharedPreferences.getString("userName", "데이터 없음");
+        userProfileImage = sharedPreferences.getString("userProfileImage", "데이터 없음");
 
         // 텍스트 Gradient 적용
         View v = inflater.inflate(R.layout.fragment_home, container, false);
@@ -45,9 +50,17 @@ public class HomeFragment extends Fragment {
         Tvg.change(titleTextView, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
 
         MainActivity activity = (MainActivity) getActivity();
-        ImageView profile = v.findViewById(R.id.profileImage);
 
-        profile.setOnClickListener(new View.OnClickListener() {
+        CircleImageView userProfileImageView = v.findViewById(R.id.profileImageView);
+
+        Glide.with(this)
+                .load(userProfileImage)
+                .placeholder(R.drawable.default_profile_image)
+                .error(R.drawable.default_profile_image)
+                .fallback(R.drawable.default_profile_image)
+                .into(userProfileImageView);
+
+        userProfileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 activity.changeFragment(1);
