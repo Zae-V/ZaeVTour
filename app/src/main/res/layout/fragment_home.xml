@@ -10,8 +10,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,14 +21,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="25dp"
+                android:orientation="horizontal"
                 android:weightSum="10">
 
                 <TextView
                     android:id="@+id/titleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_weight="9"
                     android:fontFamily="@font/notosans_bold"
                     android:layout_marginLeft="30dp"
                     android:textSize="25dp"
@@ -47,18 +49,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:fontFamily="@font/notosans_bold"
                     android:text="지금 뜨고있는 이벤트 🎊"
-                    android:fontFamily="@font/notosans_bold"
-                    android:layout_marginLeft="30dp"
                     android:textColor="@color/black"
-                    android:textSize="17dp">
-                </TextView>
+                    android:textSize="17dp"></TextView>
 
                 <HorizontalScrollView
                     android:layout_width="wrap_content"
@@ -68,6 +69,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <View
                             android:layout_width="150dp"
                             android:layout_height="150dp"
@@ -120,18 +122,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="25dp">
+                android:layout_marginTop="25dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:fontFamily="@font/notosans_bold"
                     android:text="근처에 있는 비건 식당 🥗 "
-                    android:fontFamily="@font/notosans_bold"
-                    android:layout_marginLeft="30dp"
                     android:textColor="@color/black"
-                    android:textSize="17dp">
-                </TextView>
+                    android:textSize="17dp"></TextView>
 
                 <HorizontalScrollView
                     android:layout_width="wrap_content"
@@ -141,6 +142,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <View
                             android:layout_width="150dp"
                             android:layout_height="150dp"
@@ -193,18 +195,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="25dp">
+                android:layout_marginTop="25dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="근처에 있는 놀거리 🎡"
-                    android:fontFamily="@font/notosans_bold"
                     android:layout_marginLeft="30dp"
+                    android:fontFamily="@font/notosans_bold"
+                    android:text="근처에 있는 놀거리 🎡"
                     android:textColor="@color/black"
-                    android:textSize="17dp">
-                </TextView>
+                    android:textSize="17dp"></TextView>
 
                 <HorizontalScrollView
                     android:layout_width="wrap_content"
@@ -214,6 +215,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
+
                         <View
                             android:layout_width="150dp"
                             android:layout_height="150dp"
@@ -261,10 +263,10 @@
                     </LinearLayout>
                 </HorizontalScrollView>
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
-                android:layout_height="150dp">
-            </View>
+                android:layout_height="150dp"></View>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
