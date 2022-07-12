@@ -1,42 +1,46 @@
-package com.example.zaevtour.ui.search.category;
+package com.example.zaevtour.ui.search.detail;
+
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.example.zaevtour.R;
+import com.example.zaevtour.ui.search.category.CategoryAdapter;
+import com.example.zaevtour.ui.search.category.CategoryRestaurant;
+import com.example.zaevtour.ui.search.category.CategoryRestaurantFragment;
 
 import java.util.ArrayList;
 
-public class CategoryRestaurantFragment extends Fragment {
+public class DetailRestaurantFragment extends Fragment {
 
     private ArrayList<CategoryRestaurant> restaurantsList = new ArrayList<>();
     private RecyclerView recyclerView;
     private CategoryAdapter categoryAdapter;
 
-    private CategoryRestaurantViewModel mViewModel;
+    private DetailRestaurantViewModel mViewModel;
 
-    public static CategoryRestaurantFragment newInstance() {
-        return new CategoryRestaurantFragment();
+    public static DetailRestaurantFragment newInstance() {
+        return new DetailRestaurantFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        View v = inflater.inflate(R.layout.fragment_category_restaurant, container, false);
+        View v =  inflater.inflate(R.layout.fragment_detail_restaurant, container, false);
 
         //recyclerview
-        recyclerView = (RecyclerView) v.findViewById(R.id.categoryRecyclerView_restaurant);
+        recyclerView = (RecyclerView) v.findViewById(R.id.detailRecyclerView_restaurant);
         recyclerView.setHasFixedSize(true);
         categoryAdapter = new CategoryAdapter(restaurantsList);
 
@@ -70,11 +74,12 @@ public class CategoryRestaurantFragment extends Fragment {
         restaurantsList.add(new CategoryRestaurant(R.drawable.vegan_burger,"비건 버거","버섯 버거, 콩 버거"));
         restaurantsList.add(new CategoryRestaurant(R.drawable.vegan_burger,"비건 버거","버섯 버거, 콩 버거"));
     }
-    
+
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(CategoryRestaurantViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(DetailRestaurantViewModel.class);
         // TODO: Use the ViewModel
     }
 
