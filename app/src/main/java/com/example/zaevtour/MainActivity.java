@@ -11,8 +11,6 @@ import com.example.zaevtour.ui.profile.ModifyProfileView2;
 import com.example.zaevtour.ui.profile.ProfileFragment;
 import com.example.zaevtour.ui.search.SearchFragment;
 import com.example.zaevtour.ui.search.SearchFragment2;
-import com.example.zaevtour.ui.search.category.CategoryRestaurantFragment;
-import com.example.zaevtour.ui.search.detail.DetailRestaurantFragment;
 import com.example.zaevtour.ui.travel.ScheduleFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -77,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
             case 5:
                 SearchFragment searchFragment = new SearchFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                break;
+            case 6:
+                ScheduleFragment scheduleFragment = new ScheduleFragment();
+                transaction.replace(R.id.nav_host_fragment_activity_main, scheduleFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
