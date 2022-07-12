@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 transaction.commit();
                 break;
             case 7:
-                CategoryRestaurantFragment categoryRestaurantFragment = new CategoryRestaurantFragment()
+                CategoryRestaurantFragment categoryRestaurantFragment = new CategoryRestaurantFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main,categoryRestaurantFragment);
                 transaction.addToBackStack(null);transaction.commit();
                 break;

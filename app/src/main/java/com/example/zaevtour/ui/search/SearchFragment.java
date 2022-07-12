@@ -88,7 +88,7 @@ public class SearchFragment extends Fragment {
             public void onClick(View view) {
 //                Intent intent = new Intent(getActivity(), VeganActivity.class);
 //                startActivity(intent);
-                  activity.changeFragment(6);
+                  activity.changeFragment(8);
                   //Go to Category_Restaurant
 
             }
