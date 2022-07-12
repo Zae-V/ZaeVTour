@@ -39,11 +39,11 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profileImageView"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:src="@drawable/profile_img" />
+                    android:layout_marginLeft="20dp"/>
 
                 <TextView
                     android:id="@+id/mainNameTextView"

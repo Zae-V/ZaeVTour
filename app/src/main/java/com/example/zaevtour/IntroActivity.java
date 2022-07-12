@@ -226,6 +226,7 @@ public class IntroActivity extends AppCompatActivity {
 
         editor.putString("userName", user.userName);
         editor.putString("userEmail", user.userEmail);
+        editor.putString("userProfileImage", user.profileImage);
 
         editor.commit();
     }

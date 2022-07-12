@@ -14,9 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.captaindroid.tvg.Tvg;
 import com.example.zaevtour.MainActivity;
 import com.example.zaevtour.R;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ModifyProfileView extends Fragment {
     SharedPreferences sharedPreferences;
@@ -24,6 +27,7 @@ public class ModifyProfileView extends Fragment {
 
     String userName;
     String userEmail;
+    String userProfileImage;
 
     @Nullable
     @Override
@@ -35,6 +39,7 @@ public class ModifyProfileView extends Fragment {
 
         userName = sharedPreferences.getString("userName", "데이터 없음");
         userEmail = sharedPreferences.getString("userEmail", "데이터 없음");
+        userProfileImage = sharedPreferences.getString("userProfileImage", "데이터 없음");
 
         // 텍스트 Gradient 적용
         TextView textView = v.findViewById(R.id.profileText);
@@ -48,6 +53,15 @@ public class ModifyProfileView extends Fragment {
 
         TextView emailTextView = v.findViewById(R.id.emailTextView);
         emailTextView.setText(userEmail);
+
+        CircleImageView userProfileImageView = v.findViewById(R.id.profileImageView);
+
+        Glide.with(this)
+                .load(userProfileImage)
+                .placeholder(R.drawable.default_profile_image)
+                .error(R.drawable.default_profile_image)
+                .fallback(R.drawable.default_profile_image)
+                .into(userProfileImageView);
 
         MainActivity activity = (MainActivity)getActivity();
 
