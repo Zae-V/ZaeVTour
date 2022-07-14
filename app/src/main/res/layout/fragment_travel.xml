@@ -51,5 +51,19 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/fab_btn"
+        android:layout_marginBottom="110dp"
+        android:layout_marginEnd="10dp"
+        app:fabSize="normal"
+        app:useCompatPadding="true"
+        app:tint="@null"
+        app:backgroundTint="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent "/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
