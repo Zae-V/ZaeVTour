@@ -1,9 +1,12 @@
 package com.example.zaevtour.ui.sign;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -11,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +27,15 @@ import com.example.zaevtour.IntroActivity;
 import com.example.zaevtour.MainActivity;
 import com.example.zaevtour.R;
 import com.example.zaevtour.SignActivity;
+import com.example.zaevtour.Users;
 import com.example.zaevtour.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class SignInFragment extends Fragment {
@@ -47,6 +54,9 @@ public class SignInFragment extends Fragment {
     private FirebaseAuth mAuth;
 
     private SignInViewModel mViewModel;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     public static SignInFragment newInstance() {
         return new SignInFragment();
@@ -82,6 +92,12 @@ public class SignInFragment extends Fragment {
                             if(!Objects.requireNonNull(mAuth.getCurrentUser()).isEmailVerified()){
                                 msg.setText("이메일 인증을 완료해주십시오.");
                             }else{
+                                ArrayList bookmarkList = new ArrayList();
+                                ArrayList currentPosition = new ArrayList();
+                                String profileImage = new String();
+                                Users user = new Users("제비",email,bookmarkList,currentPosition,profileImage,false);
+                                saveUserInfo(user);
+
                                 Intent intent = new Intent(getActivity(), MainActivity.class);
                                 startActivity(intent);
                             }
@@ -119,5 +135,17 @@ public class SignInFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(SignInViewModel.class);
         // TODO: Use the ViewModel
     }
+
+    public void saveUserInfo(Users user) {
+        sharedPreferences = getContext().getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        editor.putString("userName", user.userName);
+        editor.putString("userEmail", user.userEmail);
+        editor.putString("userProfileImage", user.profileImage);
+
+        editor.commit();
+    }
+
 
 }
