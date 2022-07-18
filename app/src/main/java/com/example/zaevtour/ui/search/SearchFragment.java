@@ -93,6 +93,15 @@ public class SearchFragment extends Fragment {
 
             }
         });
+
+        // 임시로 연결 설정, 후에 수정사항
+        Button allBtn = root.findViewById(R.id.allBtn);
+        allBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.changeFragment(9);
+            }
+        });
 //        final TextView textView = binding.textProfile;
 //        searchViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;

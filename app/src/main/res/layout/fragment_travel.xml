@@ -16,7 +16,7 @@
         android:layout_marginTop="25dp"
         android:fontFamily="@font/notosans_bold"
         android:text="여행 목록 📒 "
-        android:textColor="@color/black"
+        android:textColor="#2e2e2e"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

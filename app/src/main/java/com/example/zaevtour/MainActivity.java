@@ -9,6 +9,7 @@ import com.example.zaevtour.ui.home.HomeFragment;
 import com.example.zaevtour.ui.profile.ModifyProfileView;
 import com.example.zaevtour.ui.profile.ModifyProfileView2;
 import com.example.zaevtour.ui.profile.ProfileFragment;
+import com.example.zaevtour.ui.schedule.AddScheduleFragment;
 import com.example.zaevtour.ui.search.SearchFragment;
 import com.example.zaevtour.ui.search.SearchFragment2;
 import com.example.zaevtour.ui.search.category.CategoryRestaurantFragment;
@@ -100,6 +101,13 @@ public class MainActivity extends AppCompatActivity {
                 DetailRestaurantFragment detailRestaurantFragment = new DetailRestaurantFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main,detailRestaurantFragment);
                 transaction.addToBackStack(null);transaction.commit();
+                break;
+            case 9:
+                AddScheduleFragment addScheduleFragment = new AddScheduleFragment();
+                transaction.add(R.id.nav_host_fragment_activity_main, addScheduleFragment);
+                navView.setVisibility(View.GONE);
+                transaction.addToBackStack(null);
+                transaction.commit();
                 break;
         }
     }
