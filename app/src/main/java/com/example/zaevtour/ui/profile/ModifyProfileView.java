@@ -17,14 +17,12 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.captaindroid.tvg.Tvg;
 import com.example.zaevtour.MainActivity;
+import com.example.zaevtour.MySharedPreferences;
 import com.example.zaevtour.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ModifyProfileView extends Fragment {
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-
     String userName;
     String userEmail;
     String userProfileImage;
@@ -34,12 +32,9 @@ public class ModifyProfileView extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.modify_profile_view, container, false);
 
-        sharedPreferences = getContext().getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-
-        userName = sharedPreferences.getString("userName", "데이터 없음");
-        userEmail = sharedPreferences.getString("userEmail", "데이터 없음");
-        userProfileImage = sharedPreferences.getString("userProfileImage", "데이터 없음");
+        userName = MySharedPreferences.getUserName(getActivity().getApplicationContext());
+        userEmail = MySharedPreferences.getUserEmail(getActivity().getApplicationContext());
+        userProfileImage = MySharedPreferences.getUserProfileImage(getActivity().getApplicationContext());
 
         // 텍스트 Gradient 적용
         TextView textView = v.findViewById(R.id.profileText);
