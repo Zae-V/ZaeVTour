@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             case 3:
                 ModifyProfileView2 modifyProfileView2 = new ModifyProfileView2();
                 transaction.replace(R.id.nav_host_fragment_activity_main, modifyProfileView2);
+                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case 4:
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment2);
                 navView.setVisibility(View.GONE);
                 transaction.setCustomAnimations(R.anim.enter_from_top,R.anim.exit_to_top,R.anim.enter_from_top,R.anim.exit_to_top);
+                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case 5:
