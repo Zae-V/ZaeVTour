@@ -53,6 +53,8 @@ public class IntroActivity extends AppCompatActivity {
     Button joinBtn;
     ImageView introImg;
 
+    Boolean autoLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +106,14 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
         introText.startAnimation(fadeIn);
+
+        if (MySharedPreferences.getUserEmail(IntroActivity.this).length() != 0) {
+            Toast.makeText(getApplicationContext(), "자동 로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            Log.d(TAG, "이메일 저장 안됨");
+        }
 
         Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
             @Override
@@ -186,7 +196,7 @@ public class IntroActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Log.d(TAG, "로그인 성공");
-                    saveUserInfo(user);
+                    MySharedPreferences.saveUserInfo(IntroActivity.this, user);
                     Intent intent = new Intent(IntroActivity.this, MainActivity.class);
                     startActivity(intent);
                 }else{
@@ -207,7 +217,7 @@ public class IntroActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "회원가입 성공");
                     mFirestore.collection("User").document(user.userEmail).set(user);
-                    saveUserInfo(user);
+                    MySharedPreferences.saveUserInfo(IntroActivity.this, user);
 
                     Intent intent = new Intent(IntroActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -217,18 +227,6 @@ public class IntroActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    public void saveUserInfo(Users user) {
-        Log.d(TAG, "사용자 정보를 저장합니다.");
-        sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-
-        editor.putString("userName", user.userName);
-        editor.putString("userEmail", user.userEmail);
-        editor.putString("userProfileImage", user.profileImage);
-
-        editor.commit();
     }
 
     public void checkedEmailDuplicate(Boolean emailDuplicated,Users user, String password) {
