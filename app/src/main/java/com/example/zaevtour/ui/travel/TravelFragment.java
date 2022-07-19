@@ -119,4 +119,9 @@ public class TravelFragment extends Fragment {
         binding = null;
     }
 
+    public boolean onBackPressed() {
+        if(binding == null){
+            return false;
+        }return true;
+    }
 }

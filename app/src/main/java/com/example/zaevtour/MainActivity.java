@@ -17,6 +17,7 @@ import com.example.zaevtour.ui.search.SearchFragment2;
 import com.example.zaevtour.ui.search.category.CategoryRestaurantFragment;
 import com.example.zaevtour.ui.search.detail.DetailRestaurantFragment;
 import com.example.zaevtour.ui.travel.ScheduleFragment;
+import com.example.zaevtour.ui.travel.TravelFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -139,13 +140,26 @@ public class MainActivity extends AppCompatActivity {
 
         boolean handled = false;
         for(Object f : fragmentList) {
-            if(f instanceof SearchFragment2 || f instanceof AddScheduleFragment || f instanceof SetScheduleFragment ) {
+            if(f instanceof SearchFragment2) {
                 handled = ((SearchFragment2)f).onBackPressed();
 
                 if(handled) {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     SearchFragment searchFragment = new SearchFragment();
                     transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment);
+                    transaction.commit();
+                    navView.setVisibility(View.VISIBLE);
+
+                    break;
+                }
+            }
+            if(f instanceof CalenderFragment){
+                handled = ((TravelFragment)f).onBackPressed();
+
+                if(handled){
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    TravelFragment travelFragment = new TravelFragment();
+                    transaction.replace(R.id.nav_host_fragment_activity_main, travelFragment);
                     transaction.commit();
                     navView.setVisibility(View.VISIBLE);
 
