@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }
             }
-            if(f instanceof CalenderFragment){
+            if(f instanceof CalendarFragment){
                 handled = ((TravelFragment)f).onBackPressed();
 
                 if(handled){
