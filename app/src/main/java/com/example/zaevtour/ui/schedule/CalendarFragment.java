@@ -1,18 +1,14 @@
 package com.example.zaevtour.ui.schedule;
 
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.transition.Slide;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,34 +17,29 @@ import android.widget.TextView;
 
 import androidx.core.util.Pair;
 
-import com.example.zaevtour.MainActivity;
 import com.example.zaevtour.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-import com.niwattep.materialslidedatepicker.SlideDatePickerDialog;
-import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
-public class CalenderFragment extends Fragment{
+public class CalendarFragment extends Fragment{
 
-    private CalenderViewModel mViewModel;
+    private CalendarViewModel mViewModel;
 
     Button searchDateBtn;
     TextView startDateTextView;
     TextView endDateTextView;
 
-    public static CalenderFragment newInstance() {
-        return new CalenderFragment();
+    public static CalendarFragment newInstance() {
+        return new CalendarFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_calender, container, false);
+        View v =  inflater.inflate(R.layout.fragment_calendar, container, false);
 
         searchDateBtn = v.findViewById(R.id.searchDate);
         startDateTextView = v.findViewById(R.id.startDateTextView);
@@ -95,7 +86,7 @@ public class CalenderFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(CalenderViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
         // TODO: Use the ViewModel
     }
 
