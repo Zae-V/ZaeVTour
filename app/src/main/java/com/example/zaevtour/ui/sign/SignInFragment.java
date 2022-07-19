@@ -33,6 +33,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.SignInMethodQueryResult;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -101,8 +102,20 @@ public class SignInFragment extends Fragment {
                                 Intent intent = new Intent(getActivity(), MainActivity.class);
                                 startActivity(intent);
                             }
-                        }else{
-                            msg.setText("이메일과 비밀번호를 확인해주십시오.");
+                        }
+                        else{
+                            mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                                    boolean isNew = task.getResult().getSignInMethods().isEmpty();
+                                    if(isNew){
+                                        msg.setText("가입되지 않은 이메일입니다.");
+                                    }else{
+                                        msg.setText("비밀번호를 확인해주십시오.");
+                                    }
+                                }
+                            });
+
                         }
                     }
                 });
