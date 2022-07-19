@@ -99,8 +99,10 @@ public class SignUpFragment extends Fragment {
                                 }
                                 else if( task.getException() instanceof FirebaseAuthUserCollisionException){
                                     msg.setText("이미 가입되어있는 이메일입니다.");
-                                }else{
+                                }else if(!emailFormatCheck(email)){
                                     msg.setText("이메일을 이메일 형식으로 입력하십시오.");
+                                }else{
+                                    msg.setText("서버와의 연결이 불안정합니다. 나중에 다시 시도해주세요.");
                                 }
                             }
                         }
@@ -113,6 +115,17 @@ public class SignUpFragment extends Fragment {
 
         return v;
     }
+
+    public Boolean emailFormatCheck(String inputEmail){
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+        if(inputEmail.matches(emailPattern)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
