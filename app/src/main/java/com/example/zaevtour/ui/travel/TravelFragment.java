@@ -44,13 +44,13 @@ public class TravelFragment extends Fragment {
         //bookmarkViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         View v =  inflater.inflate(R.layout.fragment_travel, container, false);
+        MainActivity activity = (MainActivity)getActivity() ;
 
         // fab 버튼
         FloatingActionButton fab = (FloatingActionButton)v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                MainActivity activity = (MainActivity)getActivity() ;
                 activity.changeFragment(11);
             }
         });

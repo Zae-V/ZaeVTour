@@ -62,18 +62,21 @@ public class MainActivity extends AppCompatActivity {
                 ProfileFragment profileFragment = new ProfileFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main, profileFragment);
                 transaction.addToBackStack(null);
+
                 transaction.commit();
                 break;
             case 2:
                 ModifyProfileView modifyProfileView = new ModifyProfileView();
                 transaction.replace(R.id.nav_host_fragment_activity_main, modifyProfileView);
                 transaction.addToBackStack(null);
+
                 transaction.commit();
                 break;
             case 3:
                 ModifyProfileView2 modifyProfileView2 = new ModifyProfileView2();
                 transaction.replace(R.id.nav_host_fragment_activity_main, modifyProfileView2);
                 transaction.addToBackStack(null);
+
                 transaction.commit();
                 break;
             case 4:
@@ -81,58 +84,49 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment2);
                 navView.setVisibility(View.GONE);
                 transaction.setCustomAnimations(R.anim.enter_from_top,R.anim.exit_to_top,R.anim.enter_from_top,R.anim.exit_to_top);
-                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case 5:
                 SearchFragment searchFragment = new SearchFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case 6:
                 ScheduleFragment scheduleFragment = new ScheduleFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main, scheduleFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case 7:
                 CategoryRestaurantFragment categoryRestaurantFragment = new CategoryRestaurantFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main,categoryRestaurantFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case 8:
                 DetailRestaurantFragment detailRestaurantFragment = new DetailRestaurantFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main,detailRestaurantFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case 9:
                 AddScheduleFragment addScheduleFragment = new AddScheduleFragment();
                 transaction.add(R.id.nav_host_fragment_activity_main, addScheduleFragment);
                 navView.setVisibility(View.GONE);
-                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case 10:
                 SetScheduleFragment setScheduleFragment = new SetScheduleFragment();
                 transaction.add(R.id.nav_host_fragment_activity_main, setScheduleFragment);
                 navView.setVisibility(View.GONE);
-                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case 11:
                 CalendarFragment calendarFragment = new CalendarFragment();
                 transaction.add(R.id.nav_host_fragment_activity_main, calendarFragment);
                 navView.setVisibility(View.GONE);
-                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case 12:
                 TravelFragment travelFragment = new TravelFragment();
                 transaction.add(R.id.nav_host_fragment_activity_main, travelFragment);
-                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
 
@@ -146,13 +140,14 @@ public class MainActivity extends AppCompatActivity {
 
         boolean handled = false;
         for(Object f : fragmentList) {
+
             if(f instanceof SearchFragment2) {
                 handled = ((SearchFragment2)f).onBackPressed();
 
                 if(handled) {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     SearchFragment searchFragment = new SearchFragment();
-                    transaction.replace(R.id.nav_host_fragment_activity_main,searchFragment);
+                    transaction.add(R.id.nav_host_fragment_activity_main,searchFragment);
                     transaction.commit();
                     navView.setVisibility(View.VISIBLE);
 
@@ -165,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 if(handled){
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     TravelFragment travelFragment = new TravelFragment();
-                    transaction.replace(R.id.nav_host_fragment_activity_main, travelFragment);
+                    transaction.add(R.id.nav_host_fragment_activity_main, travelFragment);
                     transaction.commit();
                     navView.setVisibility(View.VISIBLE);
 
@@ -178,7 +173,8 @@ public class MainActivity extends AppCompatActivity {
                 if(handled){
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     SetScheduleFragment setScheduleFragment = new SetScheduleFragment();
-                    transaction.replace(R.id.nav_host_fragment_activity_main, setScheduleFragment);
+                    transaction.add(R.id.nav_host_fragment_activity_main, setScheduleFragment);
+                    transaction.addToBackStack(null);
                     transaction.commit();
                     navView.setVisibility(View.VISIBLE);
 
