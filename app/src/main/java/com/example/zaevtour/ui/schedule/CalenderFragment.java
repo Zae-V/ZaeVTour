@@ -99,11 +99,4 @@ public class CalenderFragment extends Fragment implements SlideDatePickerDialogC
         // TODO: Use the ViewModel
     }
 
-    //확인 버튼 눌렀을 때 실행되는 이벤트
-    @Override
-    public void onPositiveClick(int day, int month, int year, @NonNull Calendar calendar) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault());
-
-
-    }
 }
