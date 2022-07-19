@@ -33,7 +33,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class CalenderFragment extends Fragment implements SlideDatePickerDialogCallback {
+public class CalenderFragment extends Fragment {
 
     private CalenderViewModel mViewModel;
 
@@ -48,7 +48,7 @@ public class CalenderFragment extends Fragment implements SlideDatePickerDialogC
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_calender, container, false);
+        View v = inflater.inflate(R.layout.fragment_calender, container, false);
 
         searchDateBtn = v.findViewById(R.id.searchDate);
         startDateTextView = v.findViewById(R.id.startDateTextView);
@@ -86,7 +86,7 @@ public class CalenderFragment extends Fragment implements SlideDatePickerDialogC
                         endDateTextView.setText(dateString1 + "\n" + dateString2);
 
                         // fragment 이동
-                        MainActivity activity = (MainActivity)getActivity() ;
+                        MainActivity activity = (MainActivity) getActivity();
                         activity.changeFragment(10);
 
                     }
@@ -103,10 +103,4 @@ public class CalenderFragment extends Fragment implements SlideDatePickerDialogC
         // TODO: Use the ViewModel
     }
 
-    //확인 버튼 눌렀을 때 실행되는 이벤트
-    @Override
-    public void onPositiveClick(int day, int month, int year, @NonNull Calendar calendar) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault());
-
-    }
 }
