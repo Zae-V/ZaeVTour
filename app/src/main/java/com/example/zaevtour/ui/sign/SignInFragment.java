@@ -86,39 +86,44 @@ public class SignInFragment extends Fragment {
                 String email = editID.getText().toString().trim();
                 String pwd = editPW.getText().toString().trim();
 
-                mAuth.signInWithEmailAndPassword(email,pwd).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            if(!Objects.requireNonNull(mAuth.getCurrentUser()).isEmailVerified()){
-                                msg.setText("이메일 인증을 완료해주십시오.");
-                            }else{
-                                ArrayList bookmarkList = new ArrayList();
-                                ArrayList currentPosition = new ArrayList();
-                                String profileImage = new String();
-                                Users user = new Users("제비",email,bookmarkList,currentPosition,profileImage,false);
-                                saveUserInfo(user);
+                if(!email.equals("") && !pwd.equals("")){
+                    mAuth.signInWithEmailAndPassword(email,pwd).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                if(!Objects.requireNonNull(mAuth.getCurrentUser()).isEmailVerified()){
+                                    msg.setText("이메일 인증을 완료해주십시오.");
+                                }else{
+                                    ArrayList bookmarkList = new ArrayList();
+                                    ArrayList currentPosition = new ArrayList();
+                                    String profileImage = new String();
+                                    Users user = new Users("제비",email,bookmarkList,currentPosition,profileImage,false);
+                                    saveUserInfo(user);
 
-                                Intent intent = new Intent(getActivity(), MainActivity.class);
-                                startActivity(intent);
+                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                            else{
+                                mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                                        if(!task.isSuccessful()){
+                                            msg.setText("가입되지 않은 이메일입니다.");
+                                        }else{
+                                            msg.setText("비밀번호를 확인해주십시오.");
+
+                                        }
+
+                                    }
+                                });
+
                             }
                         }
-                        else{
-                            mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-                                    boolean isNew = task.getResult().getSignInMethods().isEmpty();
-                                    if(isNew){
-                                        msg.setText("가입되지 않은 이메일입니다.");
-                                    }else{
-                                        msg.setText("비밀번호를 확인해주십시오.");
-                                    }
-                                }
-                            });
+                    });
+                }
 
-                        }
-                    }
-                });
+
 
             }
         });
