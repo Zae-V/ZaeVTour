@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import androidx.core.util.Pair;
 
+import com.example.zaevtour.MainActivity;
 import com.example.zaevtour.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -29,6 +30,7 @@ import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class CalenderFragment extends Fragment implements SlideDatePickerDialogCallback {
@@ -36,7 +38,8 @@ public class CalenderFragment extends Fragment implements SlideDatePickerDialogC
     private CalenderViewModel mViewModel;
 
     Button searchDateBtn;
-    TextView dateTextView;
+    TextView startDateTextView;
+    TextView endDateTextView;
 
     public static CalenderFragment newInstance() {
         return new CalenderFragment();
@@ -48,25 +51,42 @@ public class CalenderFragment extends Fragment implements SlideDatePickerDialogC
         View v =  inflater.inflate(R.layout.fragment_calender, container, false);
 
         searchDateBtn = v.findViewById(R.id.searchDate);
-        dateTextView = v.findViewById(R.id.dateTextView);
+        startDateTextView = v.findViewById(R.id.startDateTextView);
+        endDateTextView = v.findViewById(R.id.endDateTextView);
 
         searchDateBtn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceType")
             @Override
             public void onClick(View view) {
-                Calendar endDate = Calendar.getInstance();
-                endDate.set(Calendar.YEAR, 2100);
+                MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
+                builder.setTitleText("Date Picker");
 
-                SlideDatePickerDialog.Builder builder = new SlideDatePickerDialog.Builder();
-                builder.setEndDate(endDate);
-                builder.setLocale((Locale.KOREAN));
-                builder.setThemeColor(Color.rgb(100, 200, 255));
-                builder.setShowYear(true);
-                builder.setCancelText("취소");
-                builder.setConfirmText("확인"); //확인버튼 문자열
+                //미리 날짜 선택
+                builder.setSelection(Pair.create(MaterialDatePicker.thisMonthInUtcMilliseconds(), MaterialDatePicker.todayInUtcMilliseconds()));
 
-                SlideDatePickerDialog dialog = builder.build();
-                dialog.show(getActivity().getSupportFragmentManager(), "Dialog");
+                MaterialDatePicker materialDatePicker = builder.build();
+
+                materialDatePicker.show(getActivity().getSupportFragmentManager(), "DATE_PICKER");
+                //dialog.show(getActivity().getSupportFragmentManager(), "Dialog");
+
+                //확인버튼
+                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
+                    @Override
+                    public void onPositiveButtonClick(Pair<Long, Long> selection) {
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+                        Date date1 = new Date();
+                        Date date2 = new Date();
+
+                        date1.setTime(selection.first);
+                        date2.setTime(selection.second);
+
+                        String dateString1 = simpleDateFormat.format(date1);
+                        String dateString2 = simpleDateFormat.format(date2);
+
+                        endDateTextView.setText(dateString1 + "\n" + dateString2);
+
+                    }
+                });
             }
         });
         return v;
@@ -84,6 +104,6 @@ public class CalenderFragment extends Fragment implements SlideDatePickerDialogC
     public void onPositiveClick(int day, int month, int year, @NonNull Calendar calendar) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault());
 
-        dateTextView.setText(format.format(calendar.getTime()));
+
     }
 }
