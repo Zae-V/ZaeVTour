@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.core.util.Pair;
 
+import com.example.zaevtour.MainActivity;
 import com.example.zaevtour.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -76,6 +77,9 @@ public class CalendarFragment extends Fragment{
 
                         endDateTextView.setText(dateString1 + "\n" + dateString2);
 
+                        // fragment 이동
+                        MainActivity activity = (MainActivity)getActivity() ;
+                        activity.changeFragment(10);
                     }
                 });
             }
