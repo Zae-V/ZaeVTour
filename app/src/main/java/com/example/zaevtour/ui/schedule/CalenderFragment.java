@@ -33,7 +33,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class CalenderFragment extends Fragment implements SlideDatePickerDialogCallback {
+public class CalenderFragment extends Fragment{
 
     private CalenderViewModel mViewModel;
 
