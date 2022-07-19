@@ -85,6 +85,10 @@ public class CalenderFragment extends Fragment implements SlideDatePickerDialogC
 
                         endDateTextView.setText(dateString1 + "\n" + dateString2);
 
+                        // fragment 이동
+                        MainActivity activity = (MainActivity)getActivity() ;
+                        activity.changeFragment(10);
+
                     }
                 });
             }
@@ -103,7 +107,6 @@ public class CalenderFragment extends Fragment implements SlideDatePickerDialogC
     @Override
     public void onPositiveClick(int day, int month, int year, @NonNull Calendar calendar) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault());
-
 
     }
 }
