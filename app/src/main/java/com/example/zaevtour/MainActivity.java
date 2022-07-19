@@ -96,12 +96,14 @@ public class MainActivity extends AppCompatActivity {
             case 7:
                 CategoryRestaurantFragment categoryRestaurantFragment = new CategoryRestaurantFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main,categoryRestaurantFragment);
-                transaction.addToBackStack(null);transaction.commit();
+                transaction.addToBackStack(null);
+                transaction.commit();
                 break;
             case 8:
                 DetailRestaurantFragment detailRestaurantFragment = new DetailRestaurantFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main,detailRestaurantFragment);
-                transaction.addToBackStack(null);transaction.commit();
+                transaction.addToBackStack(null);
+                transaction.commit();
                 break;
             case 9:
                 AddScheduleFragment addScheduleFragment = new AddScheduleFragment();
