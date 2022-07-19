@@ -120,13 +120,6 @@ public class MainActivity extends AppCompatActivity {
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
-            case 11:
-                CalenderFragment calenderFragment = new CalenderFragment();
-                transaction.add(R.id.nav_host_fragment_activity_main, calenderFragment);
-                navView.setVisibility(View.GONE);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                break;
 
         }
     }

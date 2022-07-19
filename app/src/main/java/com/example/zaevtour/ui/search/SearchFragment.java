@@ -110,7 +110,7 @@ public class SearchFragment extends Fragment {
         shopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.changeFragment(11);
+                //activity.changeFragment();
             }
         });
         return root;
