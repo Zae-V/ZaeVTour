@@ -148,4 +148,10 @@ public class AddScheduleFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    public boolean onBackPressed() {
+        if(binding == null){
+            return false;
+        }return true;
+    }
 }
