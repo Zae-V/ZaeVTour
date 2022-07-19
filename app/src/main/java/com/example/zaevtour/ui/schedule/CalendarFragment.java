@@ -94,4 +94,10 @@ public class CalendarFragment extends Fragment{
         // TODO: Use the ViewModel
     }
 
+    public boolean onBackPressed() {
+        if(mViewModel == null){
+            return false;
+        }return true;
+    }
+
 }

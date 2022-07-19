@@ -129,6 +129,12 @@ public class MainActivity extends AppCompatActivity {
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
+            case 12:
+                TravelFragment travelFragment = new TravelFragment();
+                transaction.add(R.id.nav_host_fragment_activity_main, travelFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                break;
 
         }
     }
@@ -154,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             if(f instanceof CalendarFragment){
-                handled = ((TravelFragment)f).onBackPressed();
+                handled = ((CalendarFragment)f).onBackPressed();
 
                 if(handled){
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
