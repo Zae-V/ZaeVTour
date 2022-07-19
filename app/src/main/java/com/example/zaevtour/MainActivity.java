@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
         boolean handled = false;
         for(Object f : fragmentList) {
-            if(f instanceof SearchFragment2) {
+            if(f instanceof SearchFragment2 || f instanceof AddScheduleFragment || f instanceof SetScheduleFragment ) {
                 handled = ((SearchFragment2)f).onBackPressed();
 
                 if(handled) {
