@@ -3,11 +3,15 @@ package com.example.zaevtour;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -33,6 +37,8 @@ import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -60,6 +66,7 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro);
 
+        getHashKey();
         introText = findViewById(R.id.introText);
         introImg = findViewById(R.id.introImg);
         Glide.with(this).load(R.raw.animation_bird).into(introImg);
@@ -140,20 +147,20 @@ public class IntroActivity extends AppCompatActivity {
                                 mFirestore.collection("User").document(userEmail)
                                         .get().
                                         addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                            if (task.isSuccessful()) {
-                                                DocumentSnapshot document = task.getResult();
-                                                if (document.exists()) {
-                                                    checkedEmailDuplicate(true, newUser, userPassword);
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    DocumentSnapshot document = task.getResult();
+                                                    if (document.exists()) {
+                                                        checkedEmailDuplicate(true, newUser, userPassword);
+                                                    } else {
+                                                        checkedEmailDuplicate(false, newUser, userPassword);
+                                                    }
                                                 } else {
-                                                    checkedEmailDuplicate(false, newUser, userPassword);
+                                                    Log.d(TAG, "get failed with ", task.getException());
                                                 }
-                                            } else {
-                                                Log.d(TAG, "get failed with ", task.getException());
                                             }
-                                        }
-                                    });
+                                        });
                             }
                             if (throwable != null) {
                                 Log.d(TAG, "invoke: " + throwable.getLocalizedMessage());
@@ -238,4 +245,27 @@ public class IntroActivity extends AppCompatActivity {
             signUp(user, password);
         }
     }
+
+
+    private void getHashKey(){
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (packageInfo == null)
+            Log.e("KeyHash", "KeyHash:null");
+
+        for (Signature signature : packageInfo.signatures) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            } catch (NoSuchAlgorithmException e) {
+                Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
+            }
+        }
+    }
+
 }
