@@ -114,14 +114,6 @@ public class IntroActivity extends AppCompatActivity {
         });
         introText.startAnimation(fadeIn);
 
-        if (MySharedPreferences.getUserEmail(IntroActivity.this).length() != 0) {
-            Toast.makeText(getApplicationContext(), "자동 로그인 되었습니다.", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(IntroActivity.this, MainActivity.class);
-            startActivity(intent);
-        } else {
-            Log.d(TAG, "이메일 저장 안됨");
-        }
-
         Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
             @Override
             public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
