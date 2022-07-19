@@ -21,6 +21,7 @@ import com.example.zaevtour.MainActivity;
 import com.example.zaevtour.R;
 import com.example.zaevtour.databinding.FragmentTravelBinding;
 import com.example.zaevtour.ui.bookmark.ItemTouchHelperCallback;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 import java.util.ArrayList;
@@ -43,6 +44,16 @@ public class TravelFragment extends Fragment {
         //bookmarkViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         View v =  inflater.inflate(R.layout.fragment_travel, container, false);
+
+        // fab 버튼
+        FloatingActionButton fab = (FloatingActionButton)v.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                MainActivity activity = (MainActivity)getActivity() ;
+                activity.changeFragment(11);
+            }
+        });
 
         //recyclerview
         scheduleRecyclerView = (RecyclerView) v.findViewById(R.id.travelRecycler);
