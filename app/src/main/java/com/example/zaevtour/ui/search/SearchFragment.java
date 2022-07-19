@@ -104,6 +104,15 @@ public class SearchFragment extends Fragment {
         });
 //        final TextView textView = binding.textProfile;
 //        searchViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        // 임시로 연결 설정, 후에 수정사항
+        Button shopBtn = root.findViewById(R.id.shopBtn);
+        shopBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.changeFragment(11);
+            }
+        });
         return root;
     }
 

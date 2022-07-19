@@ -1,5 +1,6 @@
 package com.example.zaevtour.ui.schedule;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
@@ -47,7 +48,8 @@ public class CalenderFragment extends Fragment implements SlideDatePickerDialogC
         View v =  inflater.inflate(R.layout.fragment_calender, container, false);
 
         searchDateBtn = v.findViewById(R.id.searchDate);
-        dateTextView = v.findViewById(R.id.dateTextView)
+        dateTextView = v.findViewById(R.id.dateTextView);
+
         searchDateBtn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceType")
             @Override
@@ -64,7 +66,7 @@ public class CalenderFragment extends Fragment implements SlideDatePickerDialogC
                 builder.setConfirmText("확인"); //확인버튼 문자열
 
                 SlideDatePickerDialog dialog = builder.build();
-                dialog.show(getSupportFragmentManager(), "Dialog");
+                dialog.show(getActivity().getSupportFragmentManager(), "Dialog");
             }
         });
         return v;
