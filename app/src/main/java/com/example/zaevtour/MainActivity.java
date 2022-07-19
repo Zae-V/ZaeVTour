@@ -152,19 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
                     break;
                 }
-            }
-            if(f instanceof CalendarFragment){
-                handled = ((TravelFragment)f).onBackPressed();
 
-                if(handled){
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    TravelFragment travelFragment = new TravelFragment();
-                    transaction.replace(R.id.nav_host_fragment_activity_main, travelFragment);
-                    transaction.commit();
-                    navView.setVisibility(View.VISIBLE);
-
-                    break;
-                }
             }
         }
 
