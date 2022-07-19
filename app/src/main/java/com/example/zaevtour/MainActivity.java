@@ -29,6 +29,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.zaevtour.databinding.ActivityMainBinding;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -116,6 +117,13 @@ public class MainActivity extends AppCompatActivity {
             case 10:
                 SetScheduleFragment setScheduleFragment = new SetScheduleFragment();
                 transaction.add(R.id.nav_host_fragment_activity_main, setScheduleFragment);
+                navView.setVisibility(View.GONE);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                break;
+            case 11:
+                CalenderFragment calenderFragment = new CalenderFragment();
+                transaction.add(R.id.nav_host_fragment_activity_main, calenderFragment);
                 navView.setVisibility(View.GONE);
                 transaction.addToBackStack(null);
                 transaction.commit();
