@@ -21,8 +21,10 @@ import android.widget.Toast;
 import com.captaindroid.tvg.Tvg;
 import com.example.zaevtour.IntroActivity;
 import com.example.zaevtour.MainActivity;
+import com.example.zaevtour.MySharedPreferences;
 import com.example.zaevtour.R;
 import com.example.zaevtour.SignActivity;
+import com.example.zaevtour.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.ActionCodeSettings;
@@ -30,6 +32,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 public class SignUpFragment extends Fragment {
 
@@ -41,6 +46,8 @@ public class SignUpFragment extends Fragment {
     TextView msg;
     private SignUpViewModel mViewModel;
     android.widget.Button Button;
+
+    FirebaseFirestore mFirestore;
     FirebaseAuth mAuth;
 
 
@@ -64,6 +71,8 @@ public class SignUpFragment extends Fragment {
         Tvg.change(greetingText, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
 
         mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
+
         Button = v.findViewById(R.id.signUpBtn);
 
         Button.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +82,10 @@ public class SignUpFragment extends Fragment {
                 String pwCheck = editPWCheck.getText().toString().trim();
                 String username = editUsernameEnter.getText().toString().trim();
                 String email = editEmailEnter.getText().toString().trim();
+
+                ArrayList bookmarkList = new ArrayList();
+                ArrayList currentPosition = new ArrayList();
+                String profileImage = new String();
 
                 if(username.length() == 0 || email.length() == 0 || pwCheck.length() == 0 || password.length() == 0){
                     msg.setText("항목을 모두 입력해주세요.");
@@ -91,6 +104,12 @@ public class SignUpFragment extends Fragment {
                                         }
                                     }
                                 });
+
+                                Users userInfo = new Users(username, email, bookmarkList, currentPosition, profileImage,false);
+
+                                mFirestore.collection("User").document(userInfo.userEmail).set(userInfo);
+                                MySharedPreferences.saveUserInfo(getActivity().getApplicationContext(), userInfo);
+
                                 Intent intent = new Intent(getActivity(), SignActivity.class);
                                 startActivity(intent);
                             } else {
