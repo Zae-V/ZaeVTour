@@ -33,8 +33,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import com.google.firebase.auth.SignInMethodQueryResult;
+
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -87,14 +91,15 @@ public class SignInFragment extends Fragment {
                 String email = editID.getText().toString().trim();
                 String pwd = editPW.getText().toString().trim();
 
-                mAuth.signInWithEmailAndPassword(email,pwd).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            if(!Objects.requireNonNull(mAuth.getCurrentUser()).isEmailVerified()){
-                                msg.setText("이메일 인증을 완료해주십시오.");
-                            }else{
-                                ArrayList bookmarkList = new ArrayList();
+                if(!email.equals("") && !pwd.equals("")){
+                    mAuth.signInWithEmailAndPassword(email,pwd).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                if(!Objects.requireNonNull(mAuth.getCurrentUser()).isEmailVerified()){
+                                    msg.setText("이메일 인증을 완료해주십시오.");
+                                }else{
+                                    ArrayList bookmarkList = new ArrayList();
                                 ArrayList currentPosition = new ArrayList();
                                 String profileImage = new String();
 
@@ -119,12 +124,28 @@ public class SignInFragment extends Fragment {
                                                 }
                                             }
                                         });
+                                }
                             }
-                        }else{
-                            msg.setText("이메일과 비밀번호를 확인해주십시오.");
+                            else{
+                                mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                                        if(!task.isSuccessful()){
+                                            msg.setText("가입되지 않은 이메일입니다.");
+                                        }else{
+                                            msg.setText("비밀번호를 확인해주십시오.");
+
+                                        }
+
+                                    }
+                                });
+
+                            }
                         }
-                    }
-                });
+                    });
+                }
+
+
 
             }
         });
