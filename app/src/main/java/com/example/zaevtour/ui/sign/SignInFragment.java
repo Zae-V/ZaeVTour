@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.captaindroid.tvg.Tvg;
 import com.example.zaevtour.IntroActivity;
 import com.example.zaevtour.MainActivity;
+import com.example.zaevtour.MySharedPreferences;
 import com.example.zaevtour.R;
 import com.example.zaevtour.SignActivity;
 import com.example.zaevtour.Users;
@@ -33,9 +34,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class SignInFragment extends Fragment {
@@ -51,7 +55,8 @@ public class SignInFragment extends Fragment {
     Button signInBtn;
     TextView msg;
 
-    private FirebaseAuth mAuth;
+    FirebaseFirestore mFirestore;
+    FirebaseAuth mAuth;
 
     private SignInViewModel mViewModel;
 
@@ -78,6 +83,7 @@ public class SignInFragment extends Fragment {
         msg = v.findViewById(R.id.error_message);
 
         mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,11 +101,28 @@ public class SignInFragment extends Fragment {
                                 ArrayList bookmarkList = new ArrayList();
                                 ArrayList currentPosition = new ArrayList();
                                 String profileImage = new String();
-                                Users user = new Users("제비",email,bookmarkList,currentPosition,profileImage,false);
-                                saveUserInfo(user);
 
-                                Intent intent = new Intent(getActivity(), MainActivity.class);
-                                startActivity(intent);
+                                mFirestore.collection("User").document(email)
+                                        .get().
+                                        addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    DocumentSnapshot document = task.getResult();
+                                                    HashMap userInfo = (HashMap) document.getData();
+                                                    String userName = (String) userInfo.get("userName");
+
+                                                    Users user = new Users(userName, email, bookmarkList, currentPosition, profileImage,false);
+                                                    MySharedPreferences.saveUserInfo(getActivity().getApplicationContext(), user);
+
+                                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                                                    startActivity(intent);
+
+                                                } else {
+                                                    Log.d("ERROR", "get failed with ", task.getException());
+                                                }
+                                            }
+                                        });
                             }
                         }else{
                             msg.setText("이메일과 비밀번호를 확인해주십시오.");
@@ -136,16 +159,16 @@ public class SignInFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
-    public void saveUserInfo(Users user) {
-        sharedPreferences = getContext().getSharedPreferences("sharedPreferences", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-
-        editor.putString("userName", user.userName);
-        editor.putString("userEmail", user.userEmail);
-        editor.putString("userProfileImage", user.profileImage);
-
-        editor.commit();
-    }
+//    public void saveUserInfo(Users user) {
+//        sharedPreferences = getContext().getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+//        editor = sharedPreferences.edit();
+//
+//        editor.putString("userName", user.userName);
+//        editor.putString("userEmail", user.userEmail);
+//        editor.putString("userProfileImage", user.profileImage);
+//
+//        editor.commit();
+//    }
 
 
 }
