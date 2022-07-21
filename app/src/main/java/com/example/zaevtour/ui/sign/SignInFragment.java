@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -59,9 +58,6 @@ public class SignInFragment extends Fragment {
     FirebaseAuth mAuth;
 
     private SignInViewModel mViewModel;
-
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
 
     public static SignInFragment newInstance() {
         return new SignInFragment();
@@ -158,17 +154,5 @@ public class SignInFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(SignInViewModel.class);
         // TODO: Use the ViewModel
     }
-
-//    public void saveUserInfo(Users user) {
-//        sharedPreferences = getContext().getSharedPreferences("sharedPreferences", MODE_PRIVATE);
-//        editor = sharedPreferences.edit();
-//
-//        editor.putString("userName", user.userName);
-//        editor.putString("userEmail", user.userEmail);
-//        editor.putString("userProfileImage", user.profileImage);
-//
-//        editor.commit();
-//    }
-
 
 }

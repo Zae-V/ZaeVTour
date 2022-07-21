@@ -50,16 +50,11 @@ public class IntroActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
 
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-
     Animation fadeIn;
     TextView introText;
     Button kakaoJoinBtn;
     Button joinBtn;
     ImageView introImg;
-
-    Boolean autoLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
