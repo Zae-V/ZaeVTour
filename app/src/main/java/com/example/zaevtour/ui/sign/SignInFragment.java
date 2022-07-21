@@ -70,7 +70,7 @@ public class SignInFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_sign_in, container, false);
+        View v = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
         userGreetingText = v.findViewById(R.id.userGreetingText);
         findPWText = v.findViewById(R.id.findPwText);
@@ -91,62 +91,56 @@ public class SignInFragment extends Fragment {
                 String email = editID.getText().toString().trim();
                 String pwd = editPW.getText().toString().trim();
 
-                if(!email.equals("") && !pwd.equals("")){
-                    mAuth.signInWithEmailAndPassword(email,pwd).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                if (!email.equals("") && !pwd.equals("")) {
+                    mAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                if(!Objects.requireNonNull(mAuth.getCurrentUser()).isEmailVerified()){
+                            if (task.isSuccessful()) {
+                                if (!Objects.requireNonNull(mAuth.getCurrentUser()).isEmailVerified()) {
                                     msg.setText("이메일 인증을 완료해주십시오.");
-                                }else{
+                                } else {
                                     ArrayList bookmarkList = new ArrayList();
-                                ArrayList currentPosition = new ArrayList();
-                                String profileImage = new String();
+                                    ArrayList currentPosition = new ArrayList();
+                                    String profileImage = new String();
 
-                                mFirestore.collection("User").document(email)
-                                        .get().
-                                        addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                if (task.isSuccessful()) {
-                                                    DocumentSnapshot document = task.getResult();
-                                                    HashMap userInfo = (HashMap) document.getData();
-                                                    String userName = (String) userInfo.get("userName");
+                                    mFirestore.collection("User").document(email)
+                                            .get().
+                                            addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                    if (task.isSuccessful()) {
+                                                        DocumentSnapshot document = task.getResult();
+                                                        HashMap userInfo = (HashMap) document.getData();
+                                                        String userName = (String) userInfo.get("userName");
 
-                                                    Users user = new Users(userName, email, bookmarkList, currentPosition, profileImage,false);
-                                                    MySharedPreferences.saveUserInfo(getActivity().getApplicationContext(), user);
+                                                        Users user = new Users(userName, email, bookmarkList, currentPosition, profileImage, false);
+                                                        MySharedPreferences.saveUserInfo(getActivity().getApplicationContext(), user);
 
-                                                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                                                    startActivity(intent);
+                                                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                                                        startActivity(intent);
 
-                                                } else {
-                                                    Log.d("ERROR", "get failed with ", task.getException());
+                                                    } else {
+                                                        Log.d("ERROR", "get failed with ", task.getException());
+                                                    }
                                                 }
-                                            }
-                                        });
+                                            });
                                 }
-                            }
-                            else{
+                            } else {
                                 mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-                                        if(!task.isSuccessful()){
+                                        if (!task.isSuccessful()) {
                                             msg.setText("가입되지 않은 이메일입니다.");
-                                        }else{
+                                        } else {
                                             msg.setText("비밀번호를 확인해주십시오.");
 
                                         }
-
                                     }
                                 });
-
                             }
                         }
                     });
                 }
-
-
-
             }
         });
 
@@ -160,12 +154,12 @@ public class SignInFragment extends Fragment {
         signUpText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((SignActivity)getActivity()).replaceFragment(SignUpFragment.newInstance()); // 새로 불러올 Fragment의 Instance를 Main으로 전달
+                ((SignActivity) getActivity()).replaceFragment(SignUpFragment.newInstance()); // 새로 불러올 Fragment의 Instance를 Main으로 전달
             }
         });
 
         // 텍스트 글자색 그라데이션 적용
-        Tvg.change(userGreetingText, Color.parseColor("#6C92F4"),  Color.parseColor("#41E884"));
+        Tvg.change(userGreetingText, Color.parseColor("#6C92F4"), Color.parseColor("#41E884"));
         return v;
     }
 
