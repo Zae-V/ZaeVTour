@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -19,8 +20,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.zaevtour.MainActivity;
 import com.example.zaevtour.R;
+import com.example.zaevtour.databinding.FragmentAddScheduleBinding;
 import com.example.zaevtour.databinding.FragmentBookmarkBinding;
+import com.example.zaevtour.databinding.FragmentSearch2Binding;
 import com.example.zaevtour.ui.bookmark.BookmarkItem;
 import com.example.zaevtour.ui.bookmark.BookmarkViewModel;
 import com.example.zaevtour.ui.bookmark.ItemTouchHelperCallback;
@@ -32,9 +36,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 public class AddScheduleFragment extends Fragment {
-    private FragmentBookmarkBinding binding;
+    private FragmentAddScheduleBinding binding;
     RecyclerView bookmarkRecyclerView;
     SelectListAdapter listAdapter;
+    View v;
     //ItemTouchHelperCallback helper;
     ArrayList<BookmarkItem> items = new ArrayList<>();
 
@@ -43,10 +48,11 @@ public class AddScheduleFragment extends Fragment {
         BookmarkViewModel bookmarkViewModel =
                 new ViewModelProvider(this).get(BookmarkViewModel.class);
 
+        binding = FragmentAddScheduleBinding.inflate(inflater, container, false);
         //final TextView textView = binding.bookmarkText;
 
         //bookmarkViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        View v =  inflater.inflate(R.layout.fragment_add_schedule, container, false);
+        v =  inflater.inflate(R.layout.fragment_add_schedule, container, false);
 
         // searchBar
         SearchView searchBar = v.findViewById(R.id.scheduleSearchBar);
@@ -54,6 +60,16 @@ public class AddScheduleFragment extends Fragment {
             @Override
             public void onClick(View v){
                 searchBar.setIconified(false);
+            }
+        });
+
+        // 선택완료 버튼
+        Button selectFab = v.findViewById(R.id.selectFab);
+        selectFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity activity = (MainActivity)getActivity();
+                activity.changeFragment(6);
             }
         });
         // spinner
@@ -150,7 +166,7 @@ public class AddScheduleFragment extends Fragment {
     }
 
     public boolean onBackPressed() {
-        if(binding == null){
+        if(v == null){
             return false;
         }return true;
     }

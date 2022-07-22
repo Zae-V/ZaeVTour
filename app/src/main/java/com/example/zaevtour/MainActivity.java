@@ -174,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     SetScheduleFragment setScheduleFragment = new SetScheduleFragment();
                     transaction.add(R.id.nav_host_fragment_activity_main, setScheduleFragment);
-                    transaction.addToBackStack(null);
                     transaction.commit();
                     navView.setVisibility(View.VISIBLE);
 

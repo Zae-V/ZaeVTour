@@ -167,11 +167,14 @@ public class IntroActivity extends AppCompatActivity {
         kakaoJoinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(IntroActivity.this)) {
-                    UserApiClient.getInstance().loginWithKakaoTalk(IntroActivity.this, callback);
-                } else {
-                    UserApiClient.getInstance().loginWithKakaoAccount(IntroActivity.this, callback);
-                }
+//                if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(IntroActivity.this)) {
+//                    UserApiClient.getInstance().loginWithKakaoTalk(IntroActivity.this, callback);
+//                } else {
+//                    UserApiClient.getInstance().loginWithKakaoAccount(IntroActivity.this, callback);
+//                }
+
+                Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
